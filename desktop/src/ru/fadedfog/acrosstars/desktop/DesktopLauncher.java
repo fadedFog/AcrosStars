@@ -10,6 +10,7 @@ public class DesktopLauncher {
 		config.title = "A c r o s s S t a r s";
 		config.width = 700;
 		config.height = 600;
+		config.y = 50;
 		config.resizable = false;
 		new LwjglApplication(new AcrosStartsGame(), config);
 	}
