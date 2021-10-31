@@ -2,19 +2,22 @@ package ru.fadedfog.acrosstars;
 
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
+
+import ru.fadedfog.acrosstars.screens.GameScreen;
 
 public class AcrosStartsGame extends ApplicationAdapter {
 	private SpriteBatch batch;
+	private GameScreen gameScreen;
 	
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
+		gameScreen = new GameScreen();
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
+		gameScreen.render(1);
 		batch.begin();
 		batch.end();
 	}
