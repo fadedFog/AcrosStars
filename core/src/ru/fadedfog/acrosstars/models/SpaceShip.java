@@ -10,7 +10,7 @@ public class SpaceShip {
 		areaObject.height = 32f;
 		areaObject.width = 32f;
 		areaObject.x = 700f / 2f;
-		areaObject.y = (600f * 10f) / 100f;
+		areaObject.y = (600f * 2f) / 100f;
 	}
 	
 	public Rectangle getAreaObject() {
