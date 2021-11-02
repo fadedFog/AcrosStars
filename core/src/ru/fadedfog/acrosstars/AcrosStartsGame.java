@@ -18,6 +18,11 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	@Override
 	public void render () {
 		gameScreen.render(1);
+		update();
+	}
+	
+	public void update() {
+		spaceShip.move();
 	}
 	
 	@Override

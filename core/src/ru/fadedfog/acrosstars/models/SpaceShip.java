@@ -2,8 +2,11 @@ package ru.fadedfog.acrosstars.models;
 
 import com.badlogic.gdx.math.Rectangle;
 
+import ru.fadedfog.acrosstars.movements.MovementSpaceShip;
+
 public class SpaceShip {
 	private Rectangle areaObject;
+	private MovementSpaceShip movement;
 
 	public SpaceShip() { // TODO vars get from config file
 		areaObject = new Rectangle();
@@ -11,6 +14,12 @@ public class SpaceShip {
 		areaObject.width = 32f;
 		areaObject.x = 700f / 2f;
 		areaObject.y = (600f * 2f) / 100f;
+		
+		movement = new MovementSpaceShip();
+	}
+	
+	public void move() {
+		movement.move(areaObject);
 	}
 	
 	public Rectangle getAreaObject() {
