@@ -1,29 +1,34 @@
 package ru.fadedfog.acrosstars;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
+import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.screens.GameScreen;
 
 public class AcrosStartsGame extends ApplicationAdapter {
-	private SpriteBatch batch;
 	private GameScreen gameScreen;
+	private SpaceShip spaceShip;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		gameScreen = new GameScreen();
+		spaceShip = new SpaceShip();
+		gameScreen = new GameScreen(this);
 	}
 
 	@Override
 	public void render () {
 		gameScreen.render(1);
-		batch.begin();
-		batch.end();
 	}
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
+	}
+
+	public SpaceShip getSpaceShip() {
+		return spaceShip;
+	}
+
+	public void setSpaceShip(SpaceShip spaceShip) {
+		this.spaceShip = spaceShip;
 	}
 }
