@@ -1,0 +1,16 @@
+{
+  "titleWindowGame": "A c r o s s S t a r s",
+  "widthWindowGame": 700,
+  "heightWindowGame": 600,
+  "yWindowGame": 50,
+  "isResizable": false,
+  "widthSpaceShip": 32.0,
+  "heightSpaceShip": 32.0,
+  "startingSpeedSpaceShip": 10.0,
+  "startingColorBG": [
+    0.1,
+    0.1,
+    0.1
+  ],
+  "startingAlfaBG": 1.0
+}
