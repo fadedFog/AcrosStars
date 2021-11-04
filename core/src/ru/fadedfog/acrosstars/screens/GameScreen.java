@@ -7,14 +7,21 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import ru.fadedfog.acrosstars.AcrosStartsGame;
+import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 
 public class GameScreen implements Screen {
+	private GameConfig config;
 	private SpriteBatch batch;
 	private AcrosStartsGame game;
 	private Texture spriteSpaceShip;
+	private float[] RGB;
+	private float alpha;
 	
 	public GameScreen(AcrosStartsGame game) {
+		config = GameConfig.getInstance();
+		RGB = config.getStartingColorBG();
+		alpha = config.getStartingAlfaBG();
 		batch = new SpriteBatch();
 		this.game = game;
 		createSprites();
@@ -29,8 +36,9 @@ public class GameScreen implements Screen {
 	}
 
 	@Override
-	public void render(float delta) { // TODO vars to config file
-		ScreenUtils.clear(0.1f, 0.1f, 0.1f, 1);
+	public void render(float delta) {
+		
+		ScreenUtils.clear(RGB[0], RGB[1], RGB[2], alpha);
 		renderSpaceShip();
 	}
 	

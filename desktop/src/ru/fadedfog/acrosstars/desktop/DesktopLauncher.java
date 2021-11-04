@@ -3,15 +3,18 @@ package ru.fadedfog.acrosstars.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 import ru.fadedfog.acrosstars.AcrosStartsGame;
+import ru.fadedfog.acrosstars.config.GameConfig;
 
 public class DesktopLauncher {
-	public static void main (String[] arg) { //TODO vars to config file
+	public static void main (String[] arg) { 
+		GameConfig gameConfig = GameConfig.getInstance();
+		gameConfig.readConfig();
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
-		config.title = "A c r o s s S t a r s";
-		config.width = 700;
-		config.height = 600;
-		config.y = 50;
-		config.resizable = false;
+		config.title = gameConfig.getTitleWindowGame();
+		config.width = gameConfig.getWidthWindowGame();
+		config.height = gameConfig.getHeightWindowGame();
+		config.y = gameConfig.getyWindowGame();
+		config.resizable = gameConfig.isResizable();
 		new LwjglApplication(new AcrosStartsGame(), config);
 	}
 }
