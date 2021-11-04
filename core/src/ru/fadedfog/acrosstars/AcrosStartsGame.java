@@ -23,6 +23,18 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	
 	public void update() {
 		spaceShip.move();
+		collisionShapeOfBounds();
+	}
+	
+	private void collisionShapeOfBounds() { // TODO vars from config files
+		if (spaceShip.getAreaObject().x < 0) {
+			spaceShip.getAreaObject().x = 0;
+		}
+		
+		float widthShip = spaceShip.getAreaObject().width;	
+		if (spaceShip.getAreaObject().x + widthShip > 700) {
+			spaceShip.getAreaObject().x = 700 - spaceShip.getAreaObject().width;
+		}
 	}
 	
 	@Override
