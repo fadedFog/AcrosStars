@@ -31,7 +31,20 @@ public class AcrosStartsGame extends ApplicationAdapter {
 
 	private void createEnemyShips() { // TODO get map of ships for game
 		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN);
+		pawnDemo.getAreaObject().x = (700f / 2f);
+		pawnDemo.getAreaObject().y = 550f;
+		
+		EnemyShip kamikazeDemo = factorySpaceShip.createEnemyShip(TypeEShip.KAMIKAZA);
+		kamikazeDemo.getAreaObject().x = (700f / 2f) - 100f;
+		kamikazeDemo.getAreaObject().y = 550f;
+		
+		EnemyShip bastionDemo = factorySpaceShip.createEnemyShip(TypeEShip.BASTION);
+		bastionDemo.getAreaObject().x = (700f / 2f) + 100f;
+		bastionDemo.getAreaObject().y = 550f;
+		
 		enemyShips.add(pawnDemo);
+		enemyShips.add(kamikazeDemo);
+		enemyShips.add(bastionDemo);
 	}
 	
 	@Override

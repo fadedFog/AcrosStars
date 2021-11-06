@@ -20,6 +20,8 @@ public class GameScreen implements Screen {
 	private AcrosStartsGame game;
 	private Texture spriteSpaceShip;
 	private Texture spriteEPawn;
+	private Texture spriteEBastion;
+	private Texture spriteEKamikaze;
 	private float[] RGB;
 	private float alpha;
 	
@@ -39,6 +41,8 @@ public class GameScreen implements Screen {
 	
 	private void createSpriteEnemyShips() {
 		spriteEPawn = new Texture(Gdx.files.internal("e_pawn.png"));
+		spriteEBastion = new Texture(Gdx.files.internal("e_bastion.png"));
+		spriteEKamikaze= new Texture(Gdx.files.internal("e_kamikaze.png"));
 	}
 	
 	@Override
@@ -88,6 +92,12 @@ public class GameScreen implements Screen {
 		switch (typeEShip) {
 			case PAWN:
 				spriteEShip = spriteEPawn;
+				break;
+			case BASTION:
+				spriteEShip = spriteEBastion;
+				break;
+			case KAMIKAZA:
+				spriteEShip = spriteEKamikaze;
 				break;
 			default:
 				spriteEShip = null;

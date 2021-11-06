@@ -21,22 +21,26 @@ public class FactorySpaceShip {
 	
 	public EnemyShip createEnemyShip(TypeEShip typeEShip) { //TODO vars from config files
 		EnemyShip enemyShip;
-		
+		Rectangle areaPawn = new Rectangle();
 		switch (typeEShip) {
 			case PAWN:
-				Rectangle areaPawn = new Rectangle();
-				areaPawn = new Rectangle();
 				areaPawn.height = 32f;
 				areaPawn.width = 32f;
-				areaPawn.x = (700f / 2f);
-				areaPawn.y = 550f;
-				enemyShip = new EnemyShip(typeEShip, config, areaPawn);
+				break;
+			case BASTION:
+				areaPawn.height = 32f;
+				areaPawn.width = 32f;
+				break;
+			case KAMIKAZA:
+				areaPawn.height = 32f;
+				areaPawn.width = 16f;
 				break;
 			default:
 				enemyShip = null;
 				break;
 		}
 		
+		enemyShip = new EnemyShip(typeEShip, config, areaPawn);		
 		return enemyShip;
 	}
 
