@@ -12,5 +12,11 @@
     0.1,
     0.1
   ],
-  "startingAlfaBG": 1.0
+  "startingAlfaBG": 1.0,
+  "widthEPawn": 24.0,
+  "heightEPawn": 24.0,
+  "widthEBastion": 32.0,
+  "heightEBastion": 32.0,
+  "widthEKamikaza": 16.0,
+  "heightEKamikaza": 24.0
 }

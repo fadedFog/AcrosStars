@@ -19,21 +19,21 @@ public class FactorySpaceShip {
 		return factorySpaceShip;
 	}
 	
-	public EnemyShip createEnemyShip(TypeEShip typeEShip) { //TODO vars from config files
+	public EnemyShip createEnemyShip(TypeEShip typeEShip) {
 		EnemyShip enemyShip;
 		Rectangle areaPawn = new Rectangle();
 		switch (typeEShip) {
 			case PAWN:
-				areaPawn.height = 32f;
-				areaPawn.width = 32f;
+				areaPawn.height = config.getHeightEPawn();
+				areaPawn.width = config.getWidthEPawn();
 				break;
 			case BASTION:
-				areaPawn.height = 32f;
-				areaPawn.width = 32f;
+				areaPawn.height = config.getHeightEBastion();
+				areaPawn.width = config.getWidthEBastion(); 
 				break;
 			case KAMIKAZA:
-				areaPawn.height = 32f;
-				areaPawn.width = 16f;
+				areaPawn.height = config.getHeightEKamikaza();
+				areaPawn.width = config.getWidthEKamikaza();
 				break;
 			default:
 				enemyShip = null;
