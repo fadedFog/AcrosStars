@@ -1,7 +1,5 @@
 package ru.fadedfog.acrosstars.config;
 
-import java.io.File;
-import java.io.IOException;
 
 public class GameConfig {
 	private final String PATH_CONFIG_FILE = "src/ru/fadedfog/acrosstars/resources/game_config.json";
@@ -11,16 +9,9 @@ public class GameConfig {
 	private Config config;
 	
 	private GameConfig() {
-		File file = new File(PATH_CONFIG_FILE);
-		try {
-			file.createNewFile();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
 		reader = new ReaderConfig(PATH_CONFIG_FILE);
 		writer = new WriterConfig(PATH_CONFIG_FILE);
-		config = new Config();
+		config = Config.getInstance();
 	}
 	
 	public static GameConfig getInstance() {
@@ -132,6 +123,54 @@ public class GameConfig {
 	
 	public void setStartingAlfaBG(float startingAlfaBG) {
 		config.setStartingAlfaBG(startingAlfaBG);
+	}
+	
+	public float getWidthEPawn() {
+		return config.getWidthEPawn();
+	}
+
+	public void setWidthEPawn(float widthEPawn) {
+		config.setWidthEPawn(widthEPawn);
+	}
+
+	public float getHeightEPawn() {
+		return config.getHeightEPawn();
+	}
+
+	public void setHeightEPawn(float heightEPawn) {
+		config.setHeightEPawn(heightEPawn);
+	}
+
+	public float getWidthEBastion() {
+		return config.getWidthEBastion();
+	}
+
+	public void setWidthEBastion(float widthEBastion) {
+		config.setWidthEBastion(widthEBastion);
+	}
+
+	public float getHeightEBastion() {
+		return config.getHeightEBastion();
+	}
+
+	public void setHeightEBastion(float heightEBastion) {
+		config.setHeightEBastion(heightEBastion);
+	}
+
+	public float getWidthEKamikaza() {
+		return config.getWidthEKamikaza();
+	}
+
+	public void setWidthEKamikaza(float widthEKamikaza) {
+		config.setWidthEKamikaza(widthEKamikaza);
+	}
+
+	public float getHeightEKamikaza() {
+		return config.getHeightEKamikaza();
+	}
+
+	public void setHeightEKamikaza(float heightEKamikaza) {
+		config.setHeightEKamikaza(heightEKamikaza);
 	}
 	
 }

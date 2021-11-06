@@ -1,5 +1,7 @@
 package ru.fadedfog.acrosstars.screens;
 
+import java.util.ArrayList;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
@@ -9,12 +11,17 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import ru.fadedfog.acrosstars.AcrosStartsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.SpaceShip;
+import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
+import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
 
 public class GameScreen implements Screen {
 	private GameConfig config;
 	private SpriteBatch batch;
 	private AcrosStartsGame game;
 	private Texture spriteSpaceShip;
+	private Texture spriteEPawn;
+	private Texture spriteEBastion;
+	private Texture spriteEKamikaze;
 	private float[] RGB;
 	private float alpha;
 	
@@ -29,6 +36,13 @@ public class GameScreen implements Screen {
 	
 	private void createSprites() {
 		spriteSpaceShip = new Texture(Gdx.files.internal("rect_spaceship.png"));
+		createSpriteEnemyShips();
+	}
+	
+	private void createSpriteEnemyShips() {
+		spriteEPawn = new Texture(Gdx.files.internal("e_pawn.png"));
+		spriteEBastion = new Texture(Gdx.files.internal("e_bastion.png"));
+		spriteEKamikaze= new Texture(Gdx.files.internal("e_kamikaze.png"));
 	}
 	
 	@Override
@@ -37,14 +51,13 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
-		
 		ScreenUtils.clear(RGB[0], RGB[1], RGB[2], alpha);
 		renderSpaceShip();
+		renderEnemyShips();
 	}
 	
 	private void renderSpaceShip() {
 		batch.begin();
-		
 		SpaceShip spaceShip = game.getSpaceShip();
 		float xShape = spaceShip.getAreaObject().x;
 		float yShape = spaceShip.getAreaObject().y;
@@ -54,6 +67,44 @@ public class GameScreen implements Screen {
 		batch.draw(spriteSpaceShip, xShape, yShape, widthShape, heigthShape);
 		
 		batch.end();
+	}
+	
+	private void renderEnemyShips() {
+		ArrayList<EnemyShip> eShips = (ArrayList<EnemyShip>) game.getEnemyShips();
+		batch.begin();
+		
+		for (EnemyShip eShip: eShips) {
+			float xShape = eShip.getAreaObject().x;
+			float yShape = eShip.getAreaObject().y;
+			float widthShape = eShip.getAreaObject().width;
+			float heigthShape = eShip.getAreaObject().height;
+			
+			Texture spriteEnemyShip = getSpriteEnemyShip(eShip.getTypeShip());
+			batch.draw(spriteEnemyShip, xShape, yShape, widthShape, heigthShape);
+		}
+		
+		batch.end();
+	}
+	
+	private Texture getSpriteEnemyShip(TypeEShip typeEShip) { 
+		Texture spriteEShip;
+		
+		switch (typeEShip) {
+			case PAWN:
+				spriteEShip = spriteEPawn;
+				break;
+			case BASTION:
+				spriteEShip = spriteEBastion;
+				break;
+			case KAMIKAZA:
+				spriteEShip = spriteEKamikaze;
+				break;
+			default:
+				spriteEShip = null;
+				break;
+		}
+		
+		return spriteEShip;
 	}
 
 	@Override

@@ -31,11 +31,4 @@ public class ReaderConfig {
 		return gson.fromJson(reader, Config.class);
 	}
 
-	public String getPathFile() {
-		return pathFile;
-	}
-
-	public void setPathFile(String pathFile) {
-		this.pathFile = pathFile;
-	}
 }

@@ -1,16 +1,34 @@
 package ru.fadedfog.acrosstars.config;
 
 public class Config {
-	private String titleWindowGame; // A c r o s s S t a r s
-	private int widthWindowGame; // 700
-	private int heightWindowGame; // 600
-	private int yWindowGame; //50
-	private boolean isResizable; //false
-	private float widthSpaceShip; //32.0f
-	private float heightSpaceShip; //32.0f
-	private float startingSpeedSpaceShip; // 10.0f
-	private float[] startingColorBG; // [0.1f, 0.1f, 0.1f]
-	private float startingAlfaBG; // 1.0f
+	private static Config config;
+	private String titleWindowGame;
+	private int widthWindowGame;
+	private int heightWindowGame;
+	private int yWindowGame;
+	private boolean isResizable;
+	private float widthSpaceShip; 
+	private float heightSpaceShip;
+	private float startingSpeedSpaceShip; 
+	private float[] startingColorBG;
+	private float startingAlfaBG;
+	
+	private float widthEPawn; 
+	private float heightEPawn;
+	private float widthEBastion; 
+	private float heightEBastion;
+	private float widthEKamikaza; 
+	private float heightEKamikaza;
+	
+	private Config() {
+	}
+	
+	public static Config getInstance() {
+		if (config == null) {
+			config = new Config();
+		}
+		return config;
+	}
 	
 	public String getTitleWindowGame() {
 		return titleWindowGame;
@@ -98,6 +116,54 @@ public class Config {
 	
 	public void setStartingAlfaBG(float startingAlfaBG) {
 		this.startingAlfaBG = startingAlfaBG;
+	}
+
+	public float getWidthEPawn() {
+		return widthEPawn;
+	}
+
+	public void setWidthEPawn(float widthEPawn) {
+		this.widthEPawn = widthEPawn;
+	}
+
+	public float getHeightEPawn() {
+		return heightEPawn;
+	}
+
+	public void setHeightEPawn(float heightEPawn) {
+		this.heightEPawn = heightEPawn;
+	}
+
+	public float getWidthEBastion() {
+		return widthEBastion;
+	}
+
+	public void setWidthEBastion(float widthEBastion) {
+		this.widthEBastion = widthEBastion;
+	}
+
+	public float getHeightEBastion() {
+		return heightEBastion;
+	}
+
+	public void setHeightEBastion(float heightEBastion) {
+		this.heightEBastion = heightEBastion;
+	}
+
+	public float getWidthEKamikaza() {
+		return widthEKamikaza;
+	}
+
+	public void setWidthEKamikaza(float widthEKamikaza) {
+		this.widthEKamikaza = widthEKamikaza;
+	}
+
+	public float getHeightEKamikaza() {
+		return heightEKamikaza;
+	}
+
+	public void setHeightEKamikaza(float heightEKamikaza) {
+		this.heightEKamikaza = heightEKamikaza;
 	}
 	
 }

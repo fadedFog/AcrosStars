@@ -34,12 +34,5 @@ public class WriterConfig {
 				.create();
 		gson.toJson(config, writer);
 	}
-
-	public String getPathFile() {
-		return pathFile;
-	}
-
-	public void setPathFile(String pathFile) {
-		this.pathFile = pathFile;
-	}
+	
 }

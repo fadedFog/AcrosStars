@@ -5,7 +5,7 @@ import com.badlogic.gdx.math.Rectangle;
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.movements.MovementSpaceShip;
 
-public class SpaceShip {
+public class SpaceShip implements Ship{
 	private GameConfig config;
 	private Rectangle areaObject;
 	private MovementSpaceShip movement;
