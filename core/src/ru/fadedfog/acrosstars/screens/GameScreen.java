@@ -10,6 +10,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import ru.fadedfog.acrosstars.AcrosStartsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
+import ru.fadedfog.acrosstars.models.Bullet;
+import ru.fadedfog.acrosstars.models.Gun;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
@@ -19,6 +21,8 @@ public class GameScreen implements Screen {
 	private SpriteBatch batch;
 	private AcrosStartsGame game;
 	private Texture spriteSpaceShip;
+	private Texture spriteGun;
+	private Texture spriteBullet;
 	private Texture spriteEPawn;
 	private Texture spriteEBastion;
 	private Texture spriteEKamikaze;
@@ -36,7 +40,13 @@ public class GameScreen implements Screen {
 	
 	private void createSprites() {
 		spriteSpaceShip = new Texture(Gdx.files.internal("rect_spaceship.png"));
+		createSpritesWeapons();
 		createSpriteEnemyShips();
+	}
+	
+	private void createSpritesWeapons() {
+		spriteGun = new Texture(Gdx.files.internal("gun.png"));
+		spriteBullet = new Texture(Gdx.files.internal("bullet.png"));
 	}
 	
 	private void createSpriteEnemyShips() {
@@ -53,18 +63,41 @@ public class GameScreen implements Screen {
 	public void render(float delta) {
 		ScreenUtils.clear(RGB[0], RGB[1], RGB[2], alpha);
 		renderSpaceShip();
+		renderWeapons();
 		renderEnemyShips();
 	}
 	
 	private void renderSpaceShip() {
 		batch.begin();
 		SpaceShip spaceShip = game.getSpaceShip();
-		float xShape = spaceShip.getAreaObject().x;
-		float yShape = spaceShip.getAreaObject().y;
-		float widthShape = spaceShip.getAreaObject().width;
-		float heigthShape = spaceShip.getAreaObject().height;
+		float xShip = spaceShip.getAreaObject().x;
+		float yShip = spaceShip.getAreaObject().y;
+		float widthShip = spaceShip.getAreaObject().width;
+		float heigthShip = spaceShip.getAreaObject().height;
 		
-		batch.draw(spriteSpaceShip, xShape, yShape, widthShape, heigthShape);
+		batch.draw(spriteSpaceShip, xShip, yShip, widthShip, heigthShip);
+		
+		batch.end();
+	}
+	
+	public void renderWeapons() {
+		batch.begin();
+		
+		Gun gun = game.getSpaceShip().getGun();
+		float xGun = gun.getX();
+		float yGun = gun.getY();
+		float widthGun = gun.getAreaObject().width;
+		float heigthGun = gun.getAreaObject().height; 
+		batch.draw(spriteGun, xGun, yGun, widthGun, heigthGun);
+		
+		for (Bullet bullet: gun.getBulletsOut()) {
+			float xBullet = bullet.getX();
+			float yBullet = bullet.getY();
+			float widthBullet = bullet.getAreaObject().width;
+			float heigthBullet = bullet.getAreaObject().height; 
+			
+			batch.draw(spriteBullet, xBullet, yBullet, widthBullet, heigthBullet);
+		}
 		
 		batch.end();
 	}
