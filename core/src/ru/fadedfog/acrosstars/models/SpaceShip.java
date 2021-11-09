@@ -9,6 +9,7 @@ public class SpaceShip implements Ship{
 	private GameConfig config;
 	private Rectangle areaObject;
 	private MovementSpaceShip movement;
+	private Gun gun;
 
 	public SpaceShip() {
 		config = GameConfig.getInstance();
@@ -18,11 +19,24 @@ public class SpaceShip implements Ship{
 		areaObject.x = config.getXSpaceShip();
 		areaObject.y = config.getYSpaceShip();
 		
+		gun = new Gun();
+		
 		movement = new MovementSpaceShip();
 	}
 	
 	public void move() {
 		movement.move(areaObject);
+		positioningGun();
+	}
+	
+
+	private void positioningGun() { // TODO demo
+		gun.setX(areaObject.x + areaObject.width / 2.5f);
+		gun.setY(areaObject.y + areaObject.height);
+	}
+	
+	public void shoot() {
+		movement.shoot(gun);
 	}
 	
 	public Rectangle getAreaObject() {
@@ -31,6 +45,14 @@ public class SpaceShip implements Ship{
 
 	public void setAreaObject(Rectangle areaObject) {
 		this.areaObject = areaObject;
+	}
+
+	public Gun getGun() {
+		return gun;
+	}
+
+	public void setGun(Gun gun) {
+		this.gun = gun;
 	}
 	
 }
