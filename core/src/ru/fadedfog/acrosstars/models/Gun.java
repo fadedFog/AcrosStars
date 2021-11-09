@@ -1,6 +1,6 @@
 package ru.fadedfog.acrosstars.models;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
@@ -18,18 +18,17 @@ public class Gun {
 		areaObject.height = 9f;
 		areaObject.width = 8f;
 		
-		bulletsOut = new LinkedList<>();
+		bulletsOut = new ArrayList<>();
 	}
 	
-	public void shoot() { // TODO add remove when out bounds
+	public void shoot() {
 		Bullet bullet = new Bullet();
 		positioningBullet(bullet);
-		bullet.start();
 		bulletsOut.add(bullet);
 	}
 	
 	private void positioningBullet(Bullet bullet) {
-		bullet.setX(areaObject.x + areaObject.width / 2);
+		bullet.setX(areaObject.x + areaObject.width / 2.5f);
 		bullet.setY(areaObject.y + areaObject.height);
 	}
 	
@@ -49,6 +48,23 @@ public class Gun {
 		areaObject.y = y;
 	}
 
+	public float getWidth() {
+		return areaObject.width;
+	}
+	
+	public void setWidth(float width) {
+		areaObject.width = width;
+	}
+	
+	public float getHeight() {
+		return areaObject.height;
+	}
+	
+	public void setHeight(float height) {
+		areaObject.height = height;
+	}
+
+	
 	public Rectangle getAreaObject() {
 		return areaObject;
 	}

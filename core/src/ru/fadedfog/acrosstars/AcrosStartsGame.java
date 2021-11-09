@@ -6,6 +6,7 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
+import ru.fadedfog.acrosstars.models.Bullet;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 import ru.fadedfog.acrosstars.models.enemies.FactorySpaceShip;
@@ -56,8 +57,27 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	public void update() {
 		spaceShip.move();
 		spaceShip.shoot();
+		updateBullets();
 		collisionShapeOfBounds();
 	}
+	private void updateBullets() {
+		List<Bullet> bulletsOfSpaceShip = spaceShip.getGun().getBulletsOut();
+		for (Bullet bullet: bulletsOfSpaceShip) {
+			bullet.fly();
+		}
+		removeBullets(bulletsOfSpaceShip);
+	}
+	
+	private void removeBullets(List<Bullet> bullets) {
+		List<Bullet> bulletToRemove = new ArrayList<>();
+		for (Bullet bullet: bullets) {
+			if (bullet.getY() > config.getHeightWindowGame()) {
+				bulletToRemove.add(bullet);
+			}
+		}
+		bullets.removeAll(bulletToRemove);
+	}
+	
 	
 	private void collisionShapeOfBounds() {
 		if (spaceShip.getAreaObject().x < 0) {

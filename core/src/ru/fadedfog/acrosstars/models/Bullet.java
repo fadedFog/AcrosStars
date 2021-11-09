@@ -2,38 +2,24 @@ package ru.fadedfog.acrosstars.models;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
-import com.badlogic.gdx.physics.box2d.Box2D;
-import com.badlogic.gdx.utils.TimeUtils;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 
-public class Bullet extends Thread {  //TODO demo change to Box2D
+public class Bullet {
 	private GameConfig config;
 	private Rectangle areaObject;
 	private float speedY;
-	private long lastFlyTime;
 	
 	public Bullet() { // TODO vars from config file
 		config = GameConfig.getInstance();
 		areaObject = new Rectangle();
 		areaObject.height = 10f;
 		areaObject.width = 3f;
-		lastFlyTime = TimeUtils.nanoTime();
-	}
-	
-	@Override
-	public void run() {
-		while (!interrupted()) {
-			fly();
-		}
+		speedY = 500f;
 	}
 
-
-	public void fly() { //TODO demo change to Box2D
-		if (TimeUtils.nanoTime() - lastFlyTime > 400000) {
-			areaObject.y += 10f * Gdx.graphics.getDeltaTime();
-			lastFlyTime = TimeUtils.nanoTime();
-		}
+	public void fly() {
+		areaObject.y += speedY * Gdx.graphics.getDeltaTime();
 	}
 	
 	public float getX() {
@@ -51,6 +37,22 @@ public class Bullet extends Thread {  //TODO demo change to Box2D
 	public void setY(float y) {
 		areaObject.y = y;
 	}
+	
+	public float getWidth() {
+		return areaObject.width;
+	}
+	
+	public void setWidth(float width) {
+		areaObject.width = width;
+	}
+	
+	public float getHeight() {
+		return areaObject.height;
+	}
+	
+	public void setHeight(float height) {
+		areaObject.height = height;
+	}
 
 	public Rectangle getAreaObject() {
 		return areaObject;
@@ -59,6 +61,13 @@ public class Bullet extends Thread {  //TODO demo change to Box2D
 	public void setAreaObject(Rectangle areaObject) {
 		this.areaObject = areaObject;
 	}
-	
+
+	public float getSpeedY() {
+		return speedY;
+	}
+
+	public void setSpeedY(float speedY) {
+		this.speedY = speedY;
+	}
 	
 }

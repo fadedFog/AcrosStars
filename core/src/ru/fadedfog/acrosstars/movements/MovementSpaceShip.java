@@ -31,7 +31,6 @@ public class MovementSpaceShip {
 	
 	public void shoot(Gun gun) {
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-			System.out.println("LEFT_M");
 			gun.shoot();
 		}
 	}
