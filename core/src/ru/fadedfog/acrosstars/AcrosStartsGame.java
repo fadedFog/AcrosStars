@@ -61,7 +61,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		collisionShapeOfBounds();
 	}
 	private void updateBullets() {
-		List<Bullet> bulletsOfSpaceShip = spaceShip.getGun().getBulletsOut();
+		List<Bullet> bulletsOfSpaceShip = spaceShip.getCannon().getBulletsOut();
 		for (Bullet bullet: bulletsOfSpaceShip) {
 			bullet.fly();
 		}

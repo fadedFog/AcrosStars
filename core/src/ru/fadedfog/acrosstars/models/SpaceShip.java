@@ -3,13 +3,15 @@ package ru.fadedfog.acrosstars.models;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
+import ru.fadedfog.acrosstars.models.cannon.Cannon;
+import ru.fadedfog.acrosstars.models.cannon.TypeCannon;
 import ru.fadedfog.acrosstars.movements.MovementSpaceShip;
 
-public class SpaceShip implements Ship{
+public class SpaceShip implements Ship {
 	private GameConfig config;
 	private Rectangle areaObject;
 	private MovementSpaceShip movement;
-	private Gun gun;
+	private Cannon cannon;
 
 	public SpaceShip() {
 		config = GameConfig.getInstance();
@@ -19,7 +21,7 @@ public class SpaceShip implements Ship{
 		areaObject.x = config.getXSpaceShip();
 		areaObject.y = config.getYSpaceShip();
 		
-		gun = new Gun();
+		cannon = new Cannon(TypeCannon.ASSAULT_GUN); //TODO var from config-file and load-file
 		
 		movement = new MovementSpaceShip();
 	}
@@ -31,12 +33,12 @@ public class SpaceShip implements Ship{
 	
 
 	private void positioningGun() { // TODO demo
-		gun.setX(areaObject.x + areaObject.width / 2.5f);
-		gun.setY(areaObject.y + areaObject.height);
+		cannon.setX(areaObject.x + areaObject.width / 2.5f);
+		cannon.setY(areaObject.y + areaObject.height);
 	}
 	
 	public void shoot() {
-		movement.shoot(gun);
+		movement.shoot(cannon);
 	}
 	
 	public Rectangle getAreaObject() {
@@ -47,12 +49,12 @@ public class SpaceShip implements Ship{
 		this.areaObject = areaObject;
 	}
 
-	public Gun getGun() {
-		return gun;
+	public Cannon getCannon() {
+		return cannon;
 	}
 
-	public void setGun(Gun gun) {
-		this.gun = gun;
+	public void setCannon(Cannon cannon) {
+		this.cannon = cannon;
 	}
 	
 }

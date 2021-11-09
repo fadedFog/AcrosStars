@@ -11,8 +11,8 @@ import com.badlogic.gdx.utils.ScreenUtils;
 import ru.fadedfog.acrosstars.AcrosStartsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.Bullet;
-import ru.fadedfog.acrosstars.models.Gun;
 import ru.fadedfog.acrosstars.models.SpaceShip;
+import ru.fadedfog.acrosstars.models.cannon.Cannon;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
 
@@ -83,14 +83,14 @@ public class GameScreen implements Screen {
 	public void renderWeapons() {
 		batch.begin();
 		
-		Gun gun = game.getSpaceShip().getGun();
-		float xGun = gun.getX();
-		float yGun = gun.getY();
-		float widthGun = gun.getAreaObject().width;
-		float heigthGun = gun.getAreaObject().height; 
+		Cannon cannon = game.getSpaceShip().getCannon();
+		float xGun = cannon.getX();
+		float yGun = cannon.getY();
+		float widthGun = cannon.getAreaObject().width;
+		float heigthGun = cannon.getAreaObject().height; 
 		batch.draw(spriteGun, xGun, yGun, widthGun, heigthGun);
 		
-		for (Bullet bullet: gun.getBulletsOut()) {
+		for (Bullet bullet: cannon.getBulletsOut()) {
 			float xBullet = bullet.getX();
 			float yBullet = bullet.getY();
 			float widthBullet = bullet.getAreaObject().width;

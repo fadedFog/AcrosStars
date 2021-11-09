@@ -1,4 +1,4 @@
-package ru.fadedfog.acrosstars.models;
+package ru.fadedfog.acrosstars.models.cannon;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,18 +6,20 @@ import java.util.List;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
+import ru.fadedfog.acrosstars.models.Bullet;
 
-public class Gun {
+public class Cannon {
 	private GameConfig config;
 	private Rectangle areaObject;
+	private TypeCannon typeCannon;
 	private List<Bullet> bulletsOut;
 	
-	public Gun() { //TODO vars from config file
+	public Cannon(TypeCannon typeCannon) { //TODO vars from config file
+		this.typeCannon = typeCannon;
 		config = GameConfig.getInstance();
 		areaObject = new Rectangle();
 		areaObject.height = 9f;
 		areaObject.width = 8f;
-		
 		bulletsOut = new ArrayList<>();
 	}
 	
@@ -73,6 +75,14 @@ public class Gun {
 		this.areaObject = areaObject;
 	}
 
+	public TypeCannon getTypeCannon() {
+		return typeCannon;
+	}
+
+	public void setTypeCannon(TypeCannon typeCannon) {
+		this.typeCannon = typeCannon;
+	}
+
 	public List<Bullet> getBulletsOut() {
 		return bulletsOut;
 	}
@@ -80,5 +90,5 @@ public class Gun {
 	public void setBulletsOut(List<Bullet> bulletsOut) {
 		this.bulletsOut = bulletsOut;
 	}
-
+	
 }
