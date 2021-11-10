@@ -21,7 +21,9 @@ public class SpaceShip implements Ship {
 		areaObject.x = config.getXSpaceShip();
 		areaObject.y = config.getYSpaceShip();
 		
-		cannon = new Cannon(TypeCannon.ASSAULT_GUN); //TODO var from config-file and load-file
+//		cannon = new Cannon(TypeCannon.ASSAULT_GUN); //TODO var from config-file and load-file
+//		cannon = new Cannon(TypeCannon.ROCKET_LAUNCHER); //TODO var from config-file and load-file
+		cannon = new Cannon(TypeCannon.LASER_GUN); //TODO var from config-file and load-file
 		
 		movement = new MovementSpaceShip();
 	}

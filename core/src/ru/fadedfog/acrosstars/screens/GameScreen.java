@@ -10,11 +10,11 @@ import com.badlogic.gdx.utils.ScreenUtils;
 
 import ru.fadedfog.acrosstars.AcrosStartsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
-import ru.fadedfog.acrosstars.models.Bullet;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.cannon.Cannon;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
+import ru.fadedfog.acrosstars.models.projectile.Projectile;
 
 public class GameScreen implements Screen {
 	private GameConfig config;
@@ -80,7 +80,7 @@ public class GameScreen implements Screen {
 		batch.end();
 	}
 	
-	public void renderWeapons() {
+	public void renderWeapons() { //TODO add switch for different cannons and projectiles
 		batch.begin();
 		
 		Cannon cannon = game.getSpaceShip().getCannon();
@@ -90,13 +90,13 @@ public class GameScreen implements Screen {
 		float heigthGun = cannon.getAreaObject().height; 
 		batch.draw(spriteGun, xGun, yGun, widthGun, heigthGun);
 		
-		for (Bullet bullet: cannon.getBulletsOut()) {
-			float xBullet = bullet.getX();
-			float yBullet = bullet.getY();
-			float widthBullet = bullet.getAreaObject().width;
-			float heigthBullet = bullet.getAreaObject().height; 
+		for (Projectile projectile: cannon.getProjectilesOut()) {
+			float xProjectile = projectile.getX();
+			float yProjectile = projectile.getY();
+			float widthProjectile = projectile.getAreaObject().width;
+			float heigthProjectile = projectile.getAreaObject().height; 
 			
-			batch.draw(spriteBullet, xBullet, yBullet, widthBullet, heigthBullet);
+			batch.draw(spriteBullet, xProjectile, yProjectile, widthProjectile, heigthProjectile);
 		}
 		
 		batch.end();

@@ -6,13 +6,13 @@ import java.util.List;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
-import ru.fadedfog.acrosstars.models.Bullet;
+import ru.fadedfog.acrosstars.models.projectile.Projectile;
 
 public class Cannon {
 	private GameConfig config;
 	private Rectangle areaObject;
 	private TypeCannon typeCannon;
-	private List<Bullet> bulletsOut;
+	private List<Projectile> projectilesOut;
 	
 	public Cannon(TypeCannon typeCannon) { //TODO vars from config file
 		this.typeCannon = typeCannon;
@@ -20,18 +20,18 @@ public class Cannon {
 		areaObject = new Rectangle();
 		areaObject.height = 9f;
 		areaObject.width = 8f;
-		bulletsOut = new ArrayList<>();
+		projectilesOut = new ArrayList<>();
 	}
 	
 	public void shoot() {
-		Bullet bullet = new Bullet();
-		positioningBullet(bullet);
-		bulletsOut.add(bullet);
+		Projectile projectile = new Projectile(typeCannon.getTypeProjectile());
+		positioningBullet(projectile);
+		projectilesOut.add(projectile);
 	}
 	
-	private void positioningBullet(Bullet bullet) {
-		bullet.setX(areaObject.x + areaObject.width / 2.5f);
-		bullet.setY(areaObject.y + areaObject.height);
+	private void positioningBullet(Projectile projectile) {
+		projectile.setX(areaObject.x + areaObject.width / 2.5f);
+		projectile.setY(areaObject.y + areaObject.height);
 	}
 	
 	public float getX() {
@@ -83,12 +83,12 @@ public class Cannon {
 		this.typeCannon = typeCannon;
 	}
 
-	public List<Bullet> getBulletsOut() {
-		return bulletsOut;
+	public List<Projectile> getProjectilesOut() {
+		return projectilesOut;
 	}
 
-	public void setBulletsOut(List<Bullet> bulletsOut) {
-		this.bulletsOut = bulletsOut;
+	public void setProjectilesOut(List<Projectile> projectilesOut) {
+		this.projectilesOut = projectilesOut;
 	}
 	
 }
