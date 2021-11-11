@@ -98,5 +98,13 @@ public class Projectile {
 	public void setSpeedProjectile(float speedProjectile) {
 		this.speedProjectile = speedProjectile;
 	}
+
+	public TypeProjectile getTypeProjectile() {
+		return typeProjectile;
+	}
+
+	public void setTypeProjectile(TypeProjectile typeProjectile) {
+		this.typeProjectile = typeProjectile;
+	}
 	
 }

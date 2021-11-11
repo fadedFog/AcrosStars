@@ -12,17 +12,23 @@ import ru.fadedfog.acrosstars.AcrosStartsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.cannon.Cannon;
+import ru.fadedfog.acrosstars.models.cannon.TypeCannon;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
+import ru.fadedfog.acrosstars.models.projectile.TypeProjectile;
 
 public class GameScreen implements Screen {
 	private GameConfig config;
 	private SpriteBatch batch;
 	private AcrosStartsGame game;
 	private Texture spriteSpaceShip;
-	private Texture spriteGun;
+	private Texture spriteAssaultGun;
+	private Texture spriteRocketLauncher;
+	private Texture spriteLaserGun;
 	private Texture spriteBullet;
+	private Texture spriteRocket;
+	private Texture spriteLaser;
 	private Texture spriteEPawn;
 	private Texture spriteEBastion;
 	private Texture spriteEKamikaze;
@@ -45,8 +51,12 @@ public class GameScreen implements Screen {
 	}
 	
 	private void createSpritesWeapons() {
-		spriteGun = new Texture(Gdx.files.internal("gun.png"));
+		spriteAssaultGun = new Texture(Gdx.files.internal("assault_gun.png"));
+		spriteRocketLauncher = new Texture(Gdx.files.internal("rocket_launcher.png"));
+		spriteLaserGun = new Texture(Gdx.files.internal("laser_gun.png"));
 		spriteBullet = new Texture(Gdx.files.internal("bullet.png"));
+		spriteRocket = new Texture(Gdx.files.internal("rocket.png"));
+		spriteLaser = new Texture(Gdx.files.internal("laser.png"));
 	}
 	
 	private void createSpriteEnemyShips() {
@@ -88,7 +98,8 @@ public class GameScreen implements Screen {
 		float yGun = cannon.getY();
 		float widthGun = cannon.getAreaObject().width;
 		float heigthGun = cannon.getAreaObject().height; 
-		batch.draw(spriteGun, xGun, yGun, widthGun, heigthGun);
+		Texture spriteCannon = getSpriteCannon(cannon.getTypeCannon());
+		batch.draw(spriteCannon, xGun, yGun, widthGun, heigthGun);
 		
 		for (Projectile projectile: cannon.getProjectilesOut()) {
 			float xProjectile = projectile.getX();
@@ -96,10 +107,48 @@ public class GameScreen implements Screen {
 			float widthProjectile = projectile.getAreaObject().width;
 			float heigthProjectile = projectile.getAreaObject().height; 
 			
-			batch.draw(spriteBullet, xProjectile, yProjectile, widthProjectile, heigthProjectile);
+			Texture spritePorjectile = getSpriteProjectileByTypeCannon(projectile.getTypeProjectile());
+			batch.draw(spritePorjectile, xProjectile, yProjectile, widthProjectile, heigthProjectile);
 		}
 		
 		batch.end();
+	}
+	
+	private Texture getSpriteCannon(TypeCannon typeCannon) {
+		Texture spriteCannon;
+		
+		switch (typeCannon) {
+			case ROCKET_LAUNCHER:
+				spriteCannon = spriteRocketLauncher;
+				break;
+			case LASER_GUN:
+				spriteCannon = spriteLaserGun;
+				break;
+			default:
+				spriteCannon = spriteAssaultGun;
+				break;
+		}
+		
+		return spriteCannon;
+	}
+	
+	
+	private Texture getSpriteProjectileByTypeCannon(TypeProjectile typeProjectile) {
+		Texture spriteProjectile;
+		
+		switch (typeProjectile) {
+			case ROCKET:
+				spriteProjectile = spriteRocket;
+				break;
+			case LASER:
+				spriteProjectile = spriteLaser;
+				break;
+			default:
+				spriteProjectile = spriteBullet;
+				break;
+		}
+		
+		return spriteProjectile;
 	}
 	
 	private void renderEnemyShips() {
