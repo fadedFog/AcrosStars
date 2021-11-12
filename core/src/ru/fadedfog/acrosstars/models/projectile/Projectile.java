@@ -1,19 +1,20 @@
 package ru.fadedfog.acrosstars.models.projectile;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
+import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.FlyBehaviorProjectile;
 
 public class Projectile {
 	private GameConfig config;
 	private Rectangle areaObject;
 	private float speedProjectile;
 	private TypeProjectile typeProjectile;
-	private long startTime;
+	private FlyBehaviorProjectile flyBehaviorProjectile;
 	
-	public Projectile(TypeProjectile typeProjectile) { // TODO vars from config or SQL
+	public Projectile(TypeProjectile typeProjectile) { // TODO vars from config or load file
 		this.typeProjectile = typeProjectile;
+		flyBehaviorProjectile = typeProjectile.getFlyBehaviorProjectile();
 		config = GameConfig.getInstance();
 		areaObject = new Rectangle();
 		areaObject.height = 10f;
@@ -22,33 +23,8 @@ public class Projectile {
 //		speedProjectile = 400f; // if Rocket
 	}
 	
-	public void fly() { // TODO different fly of projectiles
-		// TODO change to simple and better 
-		switch (typeProjectile) {
-			case BULLET_ASSAULT:
-				areaObject.y += speedProjectile * Gdx.graphics.getDeltaTime();
-				break;
-			case ROCKET:
-				if (startTime == 0) {
-					startTime = System.currentTimeMillis();
-				}
-				
-				float speedChanged = speedProjectile;
-				if (System.currentTimeMillis() - startTime < 500l) {
-					speedChanged /= 2.5f;
-				}
-				
-				areaObject.y += speedChanged * Gdx.graphics.getDeltaTime();
-				break;
-			case LASER:
-				float heightLaser = config.getHeightWindowGame();
-				areaObject.height = heightLaser;
-				
-				break;
-			default:
-				break;
-		}
-		
+	public void fly() {
+		flyBehaviorProjectile.flyProjectile(areaObject, speedProjectile);
 	}
 	
 	public float getX() {
