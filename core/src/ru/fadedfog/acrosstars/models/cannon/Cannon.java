@@ -5,21 +5,16 @@ import java.util.List;
 
 import com.badlogic.gdx.math.Rectangle;
 
-import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
 
 public class Cannon {
-	private GameConfig config;
 	private Rectangle areaObject;
 	private TypeCannon typeCannon;
 	private List<Projectile> projectilesOut;
 	
-	public Cannon(TypeCannon typeCannon) { //TODO vars from config file
+	public Cannon(TypeCannon typeCannon) {
 		this.typeCannon = typeCannon;
-		config = GameConfig.getInstance();
-		areaObject = new Rectangle();
-		areaObject.height = 9f;
-		areaObject.width = 8f;
+		areaObject = typeCannon.getAreaCannon();
 		projectilesOut = new ArrayList<>();
 	}
 	
