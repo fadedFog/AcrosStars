@@ -103,19 +103,33 @@ public class GameScreen implements Screen {
 		float heigthGun = cannon.getHeight(); 
 		float xScale = cannon.getAreaObject().getScaleX();
 		float yScale = cannon.getAreaObject().getScaleY();
-		float rotation = 65f;
+		float rotation = cannon.getRotation();
 		Sprite spriteCannon = getSpriteCannon(cannon.getTypeCannon());
-//		batch.draw(spriteCannon, xGun, yGun, widthGun, heigthGun);
-		batch.draw(spriteCannon, xGun, yGun, xOrigin, yOrigin, widthGun, heigthGun, yScale, xScale, rotation);
+		batch.draw(spriteCannon, 
+				xGun, yGun, 
+				xOrigin, yOrigin, 
+				widthGun, heigthGun, 
+				yScale, xScale, 
+				rotation);
 		
 		for (Projectile projectile: cannon.getProjectilesOut()) {
 			float xProjectile = projectile.getX();
 			float yProjectile = projectile.getY();
+			float xOriginProjectile = projectile.getAreaObject().getOriginX();
+			float yOriginProjectile = projectile.getAreaObject().getOriginY();
 			float widthProjectile = projectile.getWidth();
 			float heigthProjectile = projectile.getHeight(); 
+			float xScaleProjectile = projectile.getAreaObject().getScaleX();
+			float yScaleProjectile = projectile.getAreaObject().getScaleY();
+			float roataionxProjectile = projectile.getAreaObject().getRotation();
 			
 			Sprite spritePorjectile = getSpriteProjectileByTypeCannon(projectile.getTypeProjectile());
-			batch.draw(spritePorjectile, xProjectile, yProjectile, widthProjectile, heigthProjectile);
+			batch.draw(spritePorjectile, 
+					xProjectile, yProjectile, 
+					xOriginProjectile, yOriginProjectile, 
+					widthProjectile, heigthProjectile, 
+					xScaleProjectile, yScaleProjectile, 
+					roataionxProjectile);
 		}
 		
 		batch.end();

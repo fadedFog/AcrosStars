@@ -35,19 +35,21 @@ public class SpaceShip implements Ship {
 	}
 	
 
-	private void positioningGun() {
+	private void positioningGun() { // TODO Add some vars to config file
 		Polygon areaCannon = cannon.getAreaObject();
 		float x = areaObject.x + areaObject.width / 2.5f;
 		float y = areaObject.y + areaObject.height / 2.5f;
 		float width = cannon.getWidth();
 		float height = cannon.getHeight();
+		float xOrigin = cannon.getWidth() / 2f;
+		float yOrigin = 1f;
 		float[] areaVertices = new float[] {
 			x, y,
 			x, y + height,
 			x + width, y + height,
 			x + width, y
 		};
-		
+		areaCannon.setOrigin(xOrigin, yOrigin);
 		areaCannon.setPosition(x, y);
 		areaCannon.setVertices(areaVertices);
 	}

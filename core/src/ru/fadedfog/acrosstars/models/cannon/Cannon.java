@@ -40,12 +40,15 @@ public class Cannon {
 		float y = areaObject.getY() + widthHeight[1];
 		float width = projectile.getWidth();
 		float height = projectile.getHeight();
+		float xOrigin = projectile.getWidth() / 2f;
+		float yOrigin = projectile.getHeight() / 2f;
 		float[] areaVertices = new float[] {
 			x, y,
 			x, y + height,
 			x + width, y + height,
 			x + width, y
 		};
+		areaProjectile.setOrigin(xOrigin, yOrigin);
 		areaProjectile.setPosition(x, y);
 		areaProjectile.setVertices(areaVertices);
 	}
@@ -85,6 +88,14 @@ public class Cannon {
 		widthHeight[1] = height;
 	}
 
+	public float getRotation() {
+		return areaObject.getRotation();
+	}
+	
+	public void setRotation(float rotation) {
+		areaObject.setRotation(rotation);
+	}
+	
 	public Polygon getAreaObject() {
 		return areaObject;
 	}
