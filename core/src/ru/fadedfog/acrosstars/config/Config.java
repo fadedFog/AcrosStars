@@ -20,6 +20,13 @@ public class Config {
 	private float widthEKamikaza; 
 	private float heightEKamikaza;
 	
+	private float widthBulletAssault;
+	private float heightBulletAssault;
+	private float widthRocket;
+	private float heightRocket;
+	private float widthLaser;
+	private float heightLaser;
+	
 	private float widthAssaultGun;
 	private float heightAssaultGun;
 	private float widthRocketLauncher;
@@ -171,6 +178,54 @@ public class Config {
 
 	public void setHeightEKamikaza(float heightEKamikaza) {
 		this.heightEKamikaza = heightEKamikaza;
+	}
+	
+	public float getWidthBulletAssault() {
+		return widthBulletAssault;
+	}
+
+	public void setWidthBulletAssault(float widthBulletAssault) {
+		this.widthBulletAssault = widthBulletAssault;
+	}
+
+	public float getHeightBulletAssault() {
+		return heightBulletAssault;
+	}
+
+	public void setHeightBulletAssault(float heightBulletAssault) {
+		this.heightBulletAssault = heightBulletAssault;
+	}
+
+	public float getWidthRocket() {
+		return widthRocket;
+	}
+
+	public void setWidthRocket(float widthRocket) {
+		this.widthRocket = widthRocket;
+	}
+
+	public float getHeightRocket() {
+		return heightRocket;
+	}
+
+	public void setHeightRocket(float heightRocket) {
+		this.heightRocket = heightRocket;
+	}
+
+	public float getWidthLaser() {
+		return widthLaser;
+	}
+
+	public void setWidthLaser(float widthLaser) {
+		this.widthLaser = widthLaser;
+	}
+
+	public float getHeightLaser() {
+		return heightLaser;
+	}
+
+	public void setHeightLaser(float heightLaser) {
+		this.heightLaser = heightLaser;
 	}
 
 	public float getWidthAssaultGun() {
