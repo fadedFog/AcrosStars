@@ -96,16 +96,16 @@ public class GameScreen implements Screen {
 		Cannon cannon = game.getSpaceShip().getCannon();
 		float xGun = cannon.getX();
 		float yGun = cannon.getY();
-		float widthGun = cannon.getAreaObject().width;
-		float heigthGun = cannon.getAreaObject().height; 
+		float widthGun = cannon.getWidth();
+		float heigthGun = cannon.getHeight(); 
 		Texture spriteCannon = getSpriteCannon(cannon.getTypeCannon());
 		batch.draw(spriteCannon, xGun, yGun, widthGun, heigthGun);
 		
 		for (Projectile projectile: cannon.getProjectilesOut()) {
 			float xProjectile = projectile.getX();
 			float yProjectile = projectile.getY();
-			float widthProjectile = projectile.getAreaObject().width;
-			float heigthProjectile = projectile.getAreaObject().height; 
+			float widthProjectile = projectile.getWidth();
+			float heigthProjectile = projectile.getHeight(); 
 			
 			Texture spritePorjectile = getSpriteProjectileByTypeCannon(projectile.getTypeProjectile());
 			batch.draw(spritePorjectile, xProjectile, yProjectile, widthProjectile, heigthProjectile);

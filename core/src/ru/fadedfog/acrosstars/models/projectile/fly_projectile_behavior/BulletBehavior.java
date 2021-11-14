@@ -1,13 +1,16 @@
 package ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Polygon;
 
 public class BulletBehavior implements FlyBehaviorProjectile {
 
 	@Override
-	public Rectangle flyProjectile(Rectangle areaProjectile, float speedY) {
-		areaProjectile.y  += speedY * Gdx.graphics.getDeltaTime();
+	public Polygon flyProjectile(Polygon areaProjectile, float speedY) {
+		float x = areaProjectile.getX();
+		float y = areaProjectile.getY();
+		y += speedY * Gdx.graphics.getDeltaTime();
+		areaProjectile.setPosition(x, y);
 		return areaProjectile;
 	}
 	

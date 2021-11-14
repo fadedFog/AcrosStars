@@ -11,11 +11,21 @@ public enum TypeProjectile {
 		public FlyBehaviorProjectile getFlyBehaviorProjectile() {
 			return new BulletBehavior();
 		}
+
+		@Override
+		public float[] getAreaCannon() { // TODO From config file
+			return new float[] {3, 10};
+		}
 	},
 	ROCKET {
 		@Override
 		public FlyBehaviorProjectile getFlyBehaviorProjectile() {
 			return new RocketBehavior();
+		}
+
+		@Override
+		public float[] getAreaCannon() { // TODO From config file
+			return new float[] {3, 15};
 		}
 	},
 	LASER {
@@ -23,8 +33,13 @@ public enum TypeProjectile {
 		public FlyBehaviorProjectile getFlyBehaviorProjectile() {
 			return new LaserBehavior();
 		}
+
+		@Override
+		public float[] getAreaCannon() { // TODO From config file
+			return new float[] {3, 10};
+		}
 	};
 	
 	public abstract FlyBehaviorProjectile getFlyBehaviorProjectile();
-
+	public abstract float[] getAreaCannon();
 } 

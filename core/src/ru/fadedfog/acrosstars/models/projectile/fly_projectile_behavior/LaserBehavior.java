@@ -1,15 +1,16 @@
 package ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Polygon;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 
 public class LaserBehavior implements FlyBehaviorProjectile {
 
 	@Override
-	public Rectangle flyProjectile(Rectangle areaProjectile, float speedY) {
+	public Polygon flyProjectile(Polygon areaProjectile, float speedY) {
 		float heightLaser = GameConfig.getInstance().getHeightWindowGame();
-		areaProjectile.height = heightLaser;
+		areaProjectile.getVertices()[3] = heightLaser;
+		areaProjectile.getVertices()[5] = heightLaser;
 		return areaProjectile;
 	}
 

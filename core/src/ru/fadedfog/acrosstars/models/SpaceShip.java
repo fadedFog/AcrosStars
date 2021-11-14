@@ -1,5 +1,6 @@
 package ru.fadedfog.acrosstars.models;
 
+import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
@@ -24,7 +25,7 @@ public class SpaceShip implements Ship {
 		cannon = new Cannon(TypeCannon.ASSAULT_GUN); //TODO var from config-file and load-file
 //		cannon = new Cannon(TypeCannon.ROCKET_LAUNCHER); //TODO var from config-file and load-file
 //		cannon = new Cannon(TypeCannon.LASER_GUN); //TODO var from config-file and load-file
-		
+		positioningGun();
 		movement = new MovementSpaceShip();
 	}
 	
@@ -34,9 +35,21 @@ public class SpaceShip implements Ship {
 	}
 	
 
-	private void positioningGun() { // TODO demo
-		cannon.setX(areaObject.x + areaObject.width / 2.5f);
-		cannon.setY(areaObject.y + areaObject.height / 2.5f);
+	private void positioningGun() {
+		Polygon areaCannon = cannon.getAreaObject();
+		float x = areaObject.x + areaObject.width / 2.5f;
+		float y = areaObject.y + areaObject.height / 2.5f;
+		float width = cannon.getWidth();
+		float height = cannon.getHeight();
+		float[] areaVertices = new float[] {
+			x, y,
+			x, y + height,
+			x + width, y + height,
+			x + width, y
+		};
+		
+		areaCannon.setPosition(x, y);
+		areaCannon.setVertices(areaVertices);
 	}
 	
 	public void shoot() {

@@ -2,6 +2,7 @@ package ru.fadedfog.acrosstars.desktop;
 
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
+
 import ru.fadedfog.acrosstars.AcrosStartsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
 

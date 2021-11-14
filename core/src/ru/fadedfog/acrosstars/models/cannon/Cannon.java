@@ -3,18 +3,20 @@ package ru.fadedfog.acrosstars.models.cannon;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Polygon;
 
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
 
 public class Cannon {
-	private Rectangle areaObject;
+	private Polygon areaObject;
+	private float[] widthHeight;
 	private TypeCannon typeCannon;
 	private List<Projectile> projectilesOut;
 	
 	public Cannon(TypeCannon typeCannon) {
 		this.typeCannon = typeCannon;
-		areaObject = typeCannon.getAreaCannon();
+		widthHeight = typeCannon.getAreaCannon();
+		areaObject = new Polygon();
 		projectilesOut = new ArrayList<>();
 	}
 	
@@ -25,48 +27,62 @@ public class Cannon {
 	}
 	
 	private void positioningBullet(Projectile projectile) {
-		projectile.setX(areaObject.x + areaObject.width / 2.5f);
-		projectile.setY(areaObject.y + areaObject.height);
+		updateWidthAndHeight();
+		Polygon areaProjectile = projectile.getAreaObject();
+		float x = areaObject.getX() + widthHeight[0] / 2.5f;
+		float y = areaObject.getY() + widthHeight[1];
+		float width = projectile.getWidth();
+		float height = projectile.getHeight();
+		float[] areaVertices = new float[] {
+			x, y,
+			x, y + height,
+			x + width, y + height,
+			x + width, y
+		};
+		areaProjectile.setPosition(x, y);
+		areaProjectile.setVertices(areaVertices);
 	}
+	
+	private void updateWidthAndHeight() {
+		int lastY = areaObject.getVertices().length - 1;
+		float width = areaObject.getVertices()[lastY - 1] - areaObject.getVertices()[0];
+		float height = areaObject.getVertices()[5] - areaObject.getVertices()[1];
+		widthHeight = new float[] {width, height};
+	} 
 	
 	public float getX() {
-		return areaObject.x;
-	}
-	
-	public void setX(float x) {
-		areaObject.x = x;
+		return areaObject.getX();
 	}
 	
 	public float getY() {
-		return areaObject.y;
+		return areaObject.getY();
 	}
 	
-	public void setY(float y) {
-		areaObject.y = y;
+	public void setXY(float x, float y) {
+		areaObject.setPosition(x, y);
 	}
 
 	public float getWidth() {
-		return areaObject.width;
+		return widthHeight[0];
 	}
 	
 	public void setWidth(float width) {
-		areaObject.width = width;
+		widthHeight[0] = width;
 	}
 	
 	public float getHeight() {
-		return areaObject.height;
+		return widthHeight[1];
 	}
 	
 	public void setHeight(float height) {
-		areaObject.height = height;
+		widthHeight[1] = height;
 	}
 
-	
-	public Rectangle getAreaObject() {
+	public Polygon getAreaObject() {
 		return areaObject;
 	}
 
-	public void setAreaObject(Rectangle areaObject) {
+	public void setAreaObject(Polygon areaObject) {
 		this.areaObject = areaObject;
 	}
 
