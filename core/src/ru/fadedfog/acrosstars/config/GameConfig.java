@@ -173,4 +173,53 @@ public class GameConfig {
 		config.setHeightEKamikaza(heightEKamikaza);
 	}
 	
+
+	public float getWidthAssaultGun() {
+		return config.getWidthAssaultGun();
+	}
+
+	public void setWidthAssaultGun(float widthAssaultGun) {
+		config.setWidthAssaultGun(widthAssaultGun);
+	}
+
+	public float getHeightAssaultGun() {
+		return config.getHeightAssaultGun();
+	}
+
+	public void setHeightAssaultGun(float heightAssaultGun) {
+		config.setHeightAssaultGun(heightAssaultGun);
+	}
+
+	public float getWidthRocketLauncher() {
+		return config.getWidthRocketLauncher();
+	}
+
+	public void setWidthRocketLauncher(float widthRocketLauncher) {
+		config.setWidthRocketLauncher(widthRocketLauncher);
+	}
+
+	public float getHeightRocketLauncher() {
+		return config.getHeightRocketLauncher();
+	}
+
+	public void setHeightRocketLauncher(float heightRocketLauncher) {
+		config.setHeightRocketLauncher(heightRocketLauncher);
+	}
+
+	public float getWidthLasertGun() {
+		return config.getWidthLasertGun();
+	}
+
+	public void setWidthLasertGun(float widthLasertGun) {
+		config.setWidthLasertGun(widthLasertGun);
+	}
+
+	public float getHeightLaserGun() {
+		return config.getHeightLaserGun();
+	}
+
+	public void setHeightLaserGun(float heightLaserGun) {
+		config.setHeightLaserGun(heightLaserGun);
+	}
+	
 }

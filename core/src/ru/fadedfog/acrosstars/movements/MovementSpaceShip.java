@@ -5,7 +5,7 @@ import com.badlogic.gdx.Input;
 import com.badlogic.gdx.math.Rectangle;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
-import ru.fadedfog.acrosstars.models.Gun;
+import ru.fadedfog.acrosstars.models.cannon.Cannon;
 
 public class MovementSpaceShip {
 	private GameConfig config;
@@ -29,9 +29,9 @@ public class MovementSpaceShip {
 		}
 	}
 	
-	public void shoot(Gun gun) {
+	public void shoot(Cannon cannon) {
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
-			gun.shoot();
+			cannon.shoot();
 		}
 	}
 	

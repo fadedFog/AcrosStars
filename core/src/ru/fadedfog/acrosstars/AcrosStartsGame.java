@@ -6,11 +6,11 @@ import java.util.List;
 import com.badlogic.gdx.ApplicationAdapter;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
-import ru.fadedfog.acrosstars.models.Bullet;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 import ru.fadedfog.acrosstars.models.enemies.FactorySpaceShip;
 import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
+import ru.fadedfog.acrosstars.models.projectile.Projectile;
 import ru.fadedfog.acrosstars.screens.GameScreen;
 
 public class AcrosStartsGame extends ApplicationAdapter {
@@ -61,21 +61,21 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		collisionShapeOfBounds();
 	}
 	private void updateBullets() {
-		List<Bullet> bulletsOfSpaceShip = spaceShip.getGun().getBulletsOut();
-		for (Bullet bullet: bulletsOfSpaceShip) {
-			bullet.fly();
+		List<Projectile> projectilesOfSpaceShip = spaceShip.getCannon().getProjectilesOut();
+		for (Projectile projectile: projectilesOfSpaceShip) {
+			projectile.fly();
 		}
-		removeBullets(bulletsOfSpaceShip);
+		removeBullets(projectilesOfSpaceShip);
 	}
 	
-	private void removeBullets(List<Bullet> bullets) {
-		List<Bullet> bulletToRemove = new ArrayList<>();
-		for (Bullet bullet: bullets) {
+	private void removeBullets(List<Projectile> projectiles) {
+		List<Projectile> projectileToRemove = new ArrayList<>();
+		for (Projectile bullet: projectiles) {
 			if (bullet.getY() > config.getHeightWindowGame()) {
-				bulletToRemove.add(bullet);
+				projectileToRemove.add(bullet);
 			}
 		}
-		bullets.removeAll(bulletToRemove);
+		projectiles.removeAll(projectileToRemove);
 	}
 	
 	
