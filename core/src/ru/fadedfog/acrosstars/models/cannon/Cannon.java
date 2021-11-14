@@ -6,18 +6,25 @@ import java.util.List;
 import com.badlogic.gdx.math.Polygon;
 
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
+import ru.fadedfog.acrosstars.movements.MovementCannon;
 
 public class Cannon {
 	private Polygon areaObject;
 	private float[] widthHeight;
 	private TypeCannon typeCannon;
 	private List<Projectile> projectilesOut;
+	private MovementCannon movement;
 	
 	public Cannon(TypeCannon typeCannon) {
 		this.typeCannon = typeCannon;
 		widthHeight = typeCannon.getAreaCannon();
 		areaObject = new Polygon();
 		projectilesOut = new ArrayList<>();
+		movement = new MovementCannon();
+	}
+	
+	public void rotate() {
+		movement.rotate(areaObject);
 	}
 	
 	public void shoot() {

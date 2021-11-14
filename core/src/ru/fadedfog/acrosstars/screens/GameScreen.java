@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
@@ -22,16 +23,16 @@ public class GameScreen implements Screen {
 	private GameConfig config;
 	private SpriteBatch batch;
 	private AcrosStartsGame game;
-	private Texture spriteSpaceShip;
-	private Texture spriteAssaultGun;
-	private Texture spriteRocketLauncher;
-	private Texture spriteLaserGun;
-	private Texture spriteBullet;
-	private Texture spriteRocket;
-	private Texture spriteLaser;
-	private Texture spriteEPawn;
-	private Texture spriteEBastion;
-	private Texture spriteEKamikaze;
+	private Sprite spriteSpaceShip;
+	private Sprite spriteAssaultGun;
+	private Sprite spriteRocketLauncher;
+	private Sprite spriteLaserGun;
+	private Sprite spriteBullet;
+	private Sprite spriteRocket;
+	private Sprite spriteLaser;
+	private Sprite spriteEPawn;
+	private Sprite spriteEBastion;
+	private Sprite spriteEKamikaze;
 	private float[] RGB;
 	private float alpha;
 	
@@ -45,24 +46,24 @@ public class GameScreen implements Screen {
 	}
 	
 	private void createSprites() {
-		spriteSpaceShip = new Texture(Gdx.files.internal("rect_spaceship.png"));
+		spriteSpaceShip = new Sprite(new Texture(Gdx.files.internal("rect_spaceship.png")));
 		createSpritesWeapons();
 		createSpriteEnemyShips();
 	}
 	
 	private void createSpritesWeapons() {
-		spriteAssaultGun = new Texture(Gdx.files.internal("assault_gun.png"));
-		spriteRocketLauncher = new Texture(Gdx.files.internal("rocket_launcher.png"));
-		spriteLaserGun = new Texture(Gdx.files.internal("laser_gun.png"));
-		spriteBullet = new Texture(Gdx.files.internal("bullet.png"));
-		spriteRocket = new Texture(Gdx.files.internal("rocket.png"));
-		spriteLaser = new Texture(Gdx.files.internal("laser.png"));
+		spriteAssaultGun = new Sprite(new Texture(Gdx.files.internal("assault_gun.png")));
+		spriteRocketLauncher = new Sprite(new Texture(Gdx.files.internal("rocket_launcher.png")));
+		spriteLaserGun = new Sprite(new Texture(Gdx.files.internal("laser_gun.png")));
+		spriteBullet = new Sprite(new Texture(Gdx.files.internal("bullet.png")));
+		spriteRocket = new Sprite(new Texture(Gdx.files.internal("rocket.png")));
+		spriteLaser = new Sprite(new Texture(Gdx.files.internal("laser.png")));
 	}
 	
 	private void createSpriteEnemyShips() {
-		spriteEPawn = new Texture(Gdx.files.internal("e_pawn.png"));
-		spriteEBastion = new Texture(Gdx.files.internal("e_bastion.png"));
-		spriteEKamikaze= new Texture(Gdx.files.internal("e_kamikaze.png"));
+		spriteEPawn = new Sprite(new Texture(Gdx.files.internal("e_pawn.png")));
+		spriteEBastion = new Sprite(new Texture(Gdx.files.internal("e_bastion.png")));
+		spriteEKamikaze= new Sprite(new Texture(Gdx.files.internal("e_kamikaze.png")));
 	}
 	
 	@Override
@@ -96,10 +97,16 @@ public class GameScreen implements Screen {
 		Cannon cannon = game.getSpaceShip().getCannon();
 		float xGun = cannon.getX();
 		float yGun = cannon.getY();
+		float xOrigin = cannon.getAreaObject().getOriginX();
+		float yOrigin = cannon.getAreaObject().getOriginY();
 		float widthGun = cannon.getWidth();
 		float heigthGun = cannon.getHeight(); 
-		Texture spriteCannon = getSpriteCannon(cannon.getTypeCannon());
-		batch.draw(spriteCannon, xGun, yGun, widthGun, heigthGun);
+		float xScale = cannon.getAreaObject().getScaleX();
+		float yScale = cannon.getAreaObject().getScaleY();
+		float rotation = 65f;
+		Sprite spriteCannon = getSpriteCannon(cannon.getTypeCannon());
+//		batch.draw(spriteCannon, xGun, yGun, widthGun, heigthGun);
+		batch.draw(spriteCannon, xGun, yGun, xOrigin, yOrigin, widthGun, heigthGun, yScale, xScale, rotation);
 		
 		for (Projectile projectile: cannon.getProjectilesOut()) {
 			float xProjectile = projectile.getX();
@@ -107,15 +114,15 @@ public class GameScreen implements Screen {
 			float widthProjectile = projectile.getWidth();
 			float heigthProjectile = projectile.getHeight(); 
 			
-			Texture spritePorjectile = getSpriteProjectileByTypeCannon(projectile.getTypeProjectile());
+			Sprite spritePorjectile = getSpriteProjectileByTypeCannon(projectile.getTypeProjectile());
 			batch.draw(spritePorjectile, xProjectile, yProjectile, widthProjectile, heigthProjectile);
 		}
 		
 		batch.end();
 	}
 	
-	private Texture getSpriteCannon(TypeCannon typeCannon) {
-		Texture spriteCannon;
+	private Sprite getSpriteCannon(TypeCannon typeCannon) {
+		Sprite spriteCannon;
 		
 		switch (typeCannon) {
 			case ROCKET_LAUNCHER:
@@ -133,8 +140,8 @@ public class GameScreen implements Screen {
 	}
 	
 	
-	private Texture getSpriteProjectileByTypeCannon(TypeProjectile typeProjectile) {
-		Texture spriteProjectile;
+	private Sprite getSpriteProjectileByTypeCannon(TypeProjectile typeProjectile) {
+		Sprite spriteProjectile;
 		
 		switch (typeProjectile) {
 			case ROCKET:
@@ -161,15 +168,15 @@ public class GameScreen implements Screen {
 			float widthShape = eShip.getAreaObject().width;
 			float heigthShape = eShip.getAreaObject().height;
 			
-			Texture spriteEnemyShip = getSpriteEnemyShip(eShip.getTypeShip());
+			Sprite spriteEnemyShip = getSpriteEnemyShip(eShip.getTypeShip());
 			batch.draw(spriteEnemyShip, xShape, yShape, widthShape, heigthShape);
 		}
 		
 		batch.end();
 	}
 	
-	private Texture getSpriteEnemyShip(TypeEShip typeEShip) { 
-		Texture spriteEShip;
+	private Sprite getSpriteEnemyShip(TypeEShip typeEShip) { 
+		Sprite spriteEShip;
 		
 		switch (typeEShip) {
 			case PAWN:

@@ -56,6 +56,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	
 	public void update() {
 		spaceShip.move();
+		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
 		updateBullets();
 		collisionShapeOfBounds();
