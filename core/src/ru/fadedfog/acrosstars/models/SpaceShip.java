@@ -31,11 +31,10 @@ public class SpaceShip implements Ship {
 	
 	public void move() {
 		movement.move(areaObject);
-		positioningGun();
 	}
 	
 
-	private void positioningGun() { // TODO Add some vars to config file
+	public void positioningGun() { // TODO Add some vars to config file
 		Polygon areaCannon = cannon.getAreaObject();
 		float x = areaObject.x + areaObject.width / 2.5f;
 		float y = areaObject.y + areaObject.height / 2.5f;
