@@ -9,8 +9,8 @@ public class LaserBehavior implements FlyBehaviorProjectile {
 	@Override
 	public Polygon flyProjectile(Polygon areaProjectile, float speedY) {
 		float heightLaser = GameConfig.getInstance().getHeightWindowGame();
-		areaProjectile.getVertices()[3] = heightLaser;
-		areaProjectile.getVertices()[5] = heightLaser;
+		areaProjectile.getVertices()[3] = heightLaser + 200;
+		areaProjectile.getVertices()[5] = heightLaser + 200;
 		return areaProjectile;
 	}
 

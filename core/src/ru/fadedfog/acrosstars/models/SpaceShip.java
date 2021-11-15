@@ -40,8 +40,8 @@ public class SpaceShip implements Ship {
 		float y = areaObject.y + areaObject.height / 2.5f;
 		float width = cannon.getWidth();
 		float height = cannon.getHeight();
-		float xOrigin = cannon.getWidth() / 2f;
-		float yOrigin = 1f;
+		float xOrigin = cannon.getWidth() / 2;
+		float yOrigin = 0f;
 		float[] areaVertices = new float[] {
 			x, y,
 			x, y + height,
