@@ -3,11 +3,15 @@ package ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Polygon;
 
+import ru.fadedfog.acrosstars.models.projectile.Projectile;
+
+
 public class RocketBehavior implements FlyBehaviorProjectile {
 	private long startTime;
 	
 	@Override
-	public Polygon flyProjectile(Polygon areaProjectile, float speedY) {
+	public Polygon flyProjectile(Projectile projectile, float speedY) {
+		Polygon areaProjectile = projectile.getAreaObject();
 		if (startTime == 0) {
 			startTime = System.currentTimeMillis();
 		}

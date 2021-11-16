@@ -3,6 +3,7 @@ package ru.fadedfog.acrosstars.movements;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 
 
 public class MovementCannon {
@@ -18,6 +19,12 @@ public class MovementCannon {
 		angle -= STRAIGHT_CORNE;
 		
 		areaObject.setRotation(angle);
+	}
+	
+	public Vector2 getMousePosition() {
+		float xMouse = Gdx.input.getX();
+		float yMouse = Gdx.graphics.getHeight() - Gdx.input.getY();
+		return new Vector2(xMouse, yMouse);
 	}
 	
 }

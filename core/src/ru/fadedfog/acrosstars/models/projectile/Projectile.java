@@ -2,6 +2,7 @@ package ru.fadedfog.acrosstars.models.projectile;
 
 
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.FlyBehaviorProjectile;
@@ -9,6 +10,7 @@ import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.FlyBehav
 public class Projectile {
 	private GameConfig config;
 	private Polygon areaObject;
+	private Vector2 vectorDirection;
 	private float[] widthHeight;
 	private float speedProjectile;
 	private TypeProjectile typeProjectile;
@@ -20,12 +22,13 @@ public class Projectile {
 		flyBehaviorProjectile = typeProjectile.getFlyBehaviorProjectile();
 		widthHeight = typeProjectile.getAreaCannon();
 		areaObject = new Polygon();
+		vectorDirection = new Vector2(0, 0);
 		speedProjectile = 500f; // if BulletAssault
 //		speedProjectile = 400f; // if Rocket
 	}
 	
 	public void fly() {
-		flyBehaviorProjectile.flyProjectile(areaObject, speedProjectile);
+		flyBehaviorProjectile.flyProjectile(this, speedProjectile);
 		updateWidthAndHeight();
 	}
 	
@@ -70,6 +73,16 @@ public class Projectile {
 
 	public void setAreaObject(Polygon areaObject) {
 		this.areaObject = areaObject;
+	}
+
+	
+	
+	public Vector2 getVectorDirection() {
+		return vectorDirection;
+	}
+
+	public void setVectorDirection(Vector2 vectorDirection) {
+		this.vectorDirection = vectorDirection;
 	}
 
 	public float getSpeedProjectile() {
