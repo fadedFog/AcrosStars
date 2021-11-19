@@ -56,6 +56,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	
 	public void update() {
 		spaceShip.move();
+		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
 		updateBullets();
 		collisionShapeOfBounds();
@@ -88,6 +89,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		if (spaceShip.getAreaObject().x + widthShip > config.getWidthWindowGame()) {
 			spaceShip.getAreaObject().x = config.getWidthWindowGame() - spaceShip.getAreaObject().width;
 		}
+		spaceShip.positioningGun();
 	}
 	
 	@Override

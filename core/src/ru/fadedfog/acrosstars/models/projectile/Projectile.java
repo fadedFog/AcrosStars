@@ -1,70 +1,88 @@
 package ru.fadedfog.acrosstars.models.projectile;
 
-import com.badlogic.gdx.math.Rectangle;
+
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.FlyBehaviorProjectile;
 
 public class Projectile {
 	private GameConfig config;
-	private Rectangle areaObject;
+	private Polygon areaObject;
+	private Vector2 vectorDirection;
+	private float[] widthHeight;
 	private float speedProjectile;
 	private TypeProjectile typeProjectile;
 	private FlyBehaviorProjectile flyBehaviorProjectile;
 	
 	public Projectile(TypeProjectile typeProjectile) { // TODO vars from config or load file
+		config = GameConfig.getInstance();
 		this.typeProjectile = typeProjectile;
 		flyBehaviorProjectile = typeProjectile.getFlyBehaviorProjectile();
-		config = GameConfig.getInstance();
-		areaObject = new Rectangle();
-		areaObject.height = 10f;
-		areaObject.width = 3f;
+		widthHeight = typeProjectile.getAreaCannon();
+		areaObject = new Polygon();
+		vectorDirection = new Vector2(0, 0);
 		speedProjectile = 500f; // if BulletAssault
 //		speedProjectile = 400f; // if Rocket
 	}
 	
 	public void fly() {
-		flyBehaviorProjectile.flyProjectile(areaObject, speedProjectile);
+		flyBehaviorProjectile.flyProjectile(this, speedProjectile);
+		updateWidthAndHeight();
+	}
+	
+	private void updateWidthAndHeight() {
+		int lastY = areaObject.getVertices().length - 1;
+		float width = areaObject.getVertices()[lastY - 1] - areaObject.getVertices()[0];
+		float height = areaObject.getVertices()[5] - areaObject.getVertices()[1];
+		widthHeight = new float[] {width, height};
 	}
 	
 	public float getX() {
-		return areaObject.x;
+		return areaObject.getX();
 	}
-	
-	public void setX(float x) {
-		areaObject.x = x;
-	}
-	
+
 	public float getY() {
-		return areaObject.y;
+		return areaObject.getY();
 	}
 	
-	public void setY(float y) {
-		areaObject.y = y;
+	public void setXY(float x, float y) {
+		areaObject.setPosition(x, y);
 	}
 	
 	public float getWidth() {
-		return areaObject.width;
+		return widthHeight[0];
 	}
 	
 	public void setWidth(float width) {
-		areaObject.width = width;
+		widthHeight[0] = width;
 	}
 	
 	public float getHeight() {
-		return areaObject.height;
+		return widthHeight[1];
 	}
 	
 	public void setHeight(float height) {
-		areaObject.height = height;
+		widthHeight[1] = height;
 	}
-
-	public Rectangle getAreaObject() {
+	
+	public Polygon getAreaObject() {
 		return areaObject;
 	}
 
-	public void setAreaObject(Rectangle areaObject) {
+	public void setAreaObject(Polygon areaObject) {
 		this.areaObject = areaObject;
+	}
+
+	
+	
+	public Vector2 getVectorDirection() {
+		return vectorDirection;
+	}
+
+	public void setVectorDirection(Vector2 vectorDirection) {
+		this.vectorDirection = vectorDirection;
 	}
 
 	public float getSpeedProjectile() {
