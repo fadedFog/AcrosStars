@@ -9,6 +9,8 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
+import com.badlogic.gdx.utils.viewport.FitViewport;
+import com.badlogic.gdx.utils.viewport.Viewport;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.SpaceShip;
@@ -20,6 +22,7 @@ import ru.fadedfog.acrosstars.screens.GameScreen;
 
 public class AcrosStartsGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
+	private Viewport viewport;
 	private GameConfig config;
 	private GameScreen gameScreen;
 	private FactorySpaceShip factorySpaceShip;
@@ -29,8 +32,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		config = GameConfig.getInstance();
-		camera = new OrthographicCamera();
-		camera.setToOrtho(false, config.getWidthWindowGame(), config.getHeightWindowGame());
+		createCameraViewport();
 		factorySpaceShip = FactorySpaceShip.getInstance();
 		spaceShip = new SpaceShip();
 		enemyShips = new ArrayList<EnemyShip>();
@@ -38,6 +40,15 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		gameScreen = new GameScreen(this);
 	}
 
+	private void createCameraViewport() {
+		camera = new OrthographicCamera();
+		float widthWindow = config.getWidthWindowGame();
+		float heightWindow = config.getHeightWindowGame();
+		camera.position.set(widthWindow / 2, heightWindow / 2, 0);
+		viewport = new FitViewport(widthWindow, heightWindow, camera);
+		viewport.apply();
+	}
+	
 	private void createEnemyShips() { // TODO get map of ships for game
 		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN);
 		pawnDemo.getAreaObject().x = (700f / 2f);
@@ -115,6 +126,11 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	@Override
 	public void dispose () {
 	}
+	
+	@Override
+	public void resize(int width, int height) {
+		super.resize(width, height);
+	}
 
 	public SpaceShip getSpaceShip() {
 		return spaceShip;
@@ -138,6 +154,14 @@ public class AcrosStartsGame extends ApplicationAdapter {
 
 	public void setCamera(OrthographicCamera camera) {
 		this.camera = camera;
+	}
+
+	public Viewport getViewport() {
+		return viewport;
+	}
+
+	public void setViewport(Viewport viewport) {
+		this.viewport = viewport;
 	}
 
 }
