@@ -75,8 +75,6 @@ public class Projectile {
 		this.areaObject = areaObject;
 	}
 
-	
-	
 	public Vector2 getVectorDirection() {
 		return vectorDirection;
 	}

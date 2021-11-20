@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Vector2;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.SpaceShip;
@@ -58,25 +61,36 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		spaceShip.move();
 		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
-		updateBullets();
+		updateProjectiles();
 		collisionShapeOfBounds();
 	}
-	private void updateBullets() {
+	private void updateProjectiles() {
 		List<Projectile> projectilesOfSpaceShip = spaceShip.getCannon().getProjectilesOut();
 		for (Projectile projectile: projectilesOfSpaceShip) {
 			projectile.fly();
 		}
-		removeBullets(projectilesOfSpaceShip);
+		removeProjectiles(projectilesOfSpaceShip);
 	}
 	
-	private void removeBullets(List<Projectile> projectiles) {
+	private void removeProjectiles(List<Projectile> projectiles) {
 		List<Projectile> projectileToRemove = new ArrayList<>();
-		for (Projectile bullet: projectiles) {
-			if (bullet.getY() > config.getHeightWindowGame()) {
-				projectileToRemove.add(bullet);
+		for (Projectile projectile: projectiles) {
+			if (!isPolygonContainsGameFiled(projectile.getAreaObject())) {
+				projectileToRemove.add(projectile);
 			}
 		}
 		projectiles.removeAll(projectileToRemove);
+	}
+	
+	private boolean isPolygonContainsGameFiled(Polygon polygon) {
+		Vector2 posPolygon = new Vector2(polygon.getX(), polygon.getY());
+		float width = config.getWidthWindowGame(); 
+		float height = config.getHeightWindowGame();
+		Rectangle areaWindow = new Rectangle(0, 0, width, height);
+
+		boolean isContains = areaWindow.contains(posPolygon);
+		
+		return isContains;
 	}
 	
 	
