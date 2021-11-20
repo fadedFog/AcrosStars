@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.graphics.Camera;
+import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Rectangle;
 import com.badlogic.gdx.math.Vector2;
@@ -17,6 +19,7 @@ import ru.fadedfog.acrosstars.models.projectile.Projectile;
 import ru.fadedfog.acrosstars.screens.GameScreen;
 
 public class AcrosStartsGame extends ApplicationAdapter {
+	private OrthographicCamera camera;
 	private GameConfig config;
 	private GameScreen gameScreen;
 	private FactorySpaceShip factorySpaceShip;
@@ -26,6 +29,8 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	@Override
 	public void create () {
 		config = GameConfig.getInstance();
+		camera = new OrthographicCamera();
+		camera.setToOrtho(false, config.getWidthWindowGame(), config.getHeightWindowGame());
 		factorySpaceShip = FactorySpaceShip.getInstance();
 		spaceShip = new SpaceShip();
 		enemyShips = new ArrayList<EnemyShip>();
@@ -53,6 +58,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	
 	@Override
 	public void render () {
+		camera.update();
 		gameScreen.render(1);
 		update();
 	}
@@ -124,6 +130,14 @@ public class AcrosStartsGame extends ApplicationAdapter {
 
 	public void setEnemyShips(List<EnemyShip> enemyShips) {
 		this.enemyShips = enemyShips;
+	}
+
+	public Camera getCamera() {
+		return camera;
+	}
+
+	public void setCamera(OrthographicCamera camera) {
+		this.camera = camera;
 	}
 
 }

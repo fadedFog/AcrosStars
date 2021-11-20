@@ -42,6 +42,7 @@ public class GameScreen implements Screen {
 		alpha = config.getStartingAlfaBG();
 		batch = new SpriteBatch();
 		this.game = game;
+		
 		createSprites();
 	}
 	
@@ -72,6 +73,7 @@ public class GameScreen implements Screen {
 
 	@Override
 	public void render(float delta) {
+		batch.setProjectionMatrix(game.getCamera().combined);
 		ScreenUtils.clear(RGB[0], RGB[1], RGB[2], alpha);
 		renderSpaceShip();
 		renderWeapons();
