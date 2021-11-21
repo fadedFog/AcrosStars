@@ -20,7 +20,7 @@ import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
 import ru.fadedfog.acrosstars.screens.GameScreen;
 
-public class AcrosStartsGame extends ApplicationAdapter {
+public class AcrosStarsGame extends ApplicationAdapter {
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private GameConfig config;
@@ -53,14 +53,17 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN);
 		pawnDemo.getAreaObject().x = (700f / 2f);
 		pawnDemo.getAreaObject().y = 550f;
+		pawnDemo.getAttackBehavior().setGame(this);
 		
 		EnemyShip kamikazeDemo = factorySpaceShip.createEnemyShip(TypeEShip.KAMIKAZA);
 		kamikazeDemo.getAreaObject().x = (700f / 2f) - 100f;
 		kamikazeDemo.getAreaObject().y = 550f;
+		kamikazeDemo.getAttackBehavior().setGame(this);
 		
 		EnemyShip bastionDemo = factorySpaceShip.createEnemyShip(TypeEShip.BASTION);
 		bastionDemo.getAreaObject().x = (700f / 2f) + 100f;
 		bastionDemo.getAreaObject().y = 550f;
+		bastionDemo.getAttackBehavior().setGame(this);
 		
 		enemyShips.add(pawnDemo);
 		enemyShips.add(kamikazeDemo);

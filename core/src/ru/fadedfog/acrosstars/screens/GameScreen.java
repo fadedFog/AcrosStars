@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
-import ru.fadedfog.acrosstars.AcrosStartsGame;
+import ru.fadedfog.acrosstars.AcrosStarsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.cannon.Cannon;
@@ -22,7 +22,7 @@ import ru.fadedfog.acrosstars.models.projectile.TypeProjectile;
 public class GameScreen implements Screen {
 	private GameConfig config;
 	private SpriteBatch batch;
-	private AcrosStartsGame game;
+	private AcrosStarsGame game;
 	private Sprite spriteSpaceShip;
 	private Sprite spriteAssaultGun;
 	private Sprite spriteRocketLauncher;
@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
 	private float[] RGB;
 	private float alpha;
 	
-	public GameScreen(AcrosStartsGame game) {
+	public GameScreen(AcrosStarsGame game) {
 		config = GameConfig.getInstance();
 		RGB = config.getStartingColorBG();
 		alpha = config.getStartingAlfaBG();

@@ -3,7 +3,7 @@ package ru.fadedfog.acrosstars.desktop;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
-import ru.fadedfog.acrosstars.AcrosStartsGame;
+import ru.fadedfog.acrosstars.AcrosStarsGame;
 import ru.fadedfog.acrosstars.config.GameConfig;
 
 public class DesktopLauncher {
@@ -16,6 +16,6 @@ public class DesktopLauncher {
 		config.height = gameConfig.getHeightWindowGame();
 		config.y = gameConfig.getyWindowGame();
 		config.resizable = gameConfig.isResizable();
-		new LwjglApplication(new AcrosStartsGame(), config);
+		new LwjglApplication(new AcrosStarsGame(), config);
 	}
 }
