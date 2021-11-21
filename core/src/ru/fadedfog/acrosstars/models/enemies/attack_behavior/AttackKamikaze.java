@@ -1,11 +1,15 @@
 package ru.fadedfog.acrosstars.models.enemies.attack_behavior;
 
+import com.badlogic.gdx.math.MathUtils;
+import com.badlogic.gdx.math.Vector2;
+
 import ru.fadedfog.acrosstars.AcrosStarsGame;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 
 public class AttackKamikaze implements AttackBehavior {
 	private AcrosStarsGame game;
 	private EnemyShip eShip;
+	private final float STRAIGHT_CORNE = 90f;
 	
 	public AttackKamikaze() {}
 	
@@ -16,13 +20,14 @@ public class AttackKamikaze implements AttackBehavior {
 
 	@Override
 	public void attack() {
-		float xEShip = eShip.getAreaObject().getX();
-		float yEShip = eShip.getAreaObject().getX();
+		Vector2 centerEShip = eShip.getCenterPosition();
 		float xShip = game.getSpaceShip().getCenterPosition().x;
 		float yShip = game.getSpaceShip().getCenterPosition().y;
 		
-		System.out.println(xEShip + " " + yEShip);
-		System.out.println(xShip + " " + yShip + " \n");
+		float angle = MathUtils.radiansToDegrees * MathUtils.atan2(centerEShip.y - yShip, centerEShip.x - xShip);
+		angle -= STRAIGHT_CORNE;
+		
+		eShip.getAreaObject().setRotation(angle);
 	}
 	
 	@Override

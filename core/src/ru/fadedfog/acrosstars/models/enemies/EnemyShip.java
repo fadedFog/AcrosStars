@@ -1,6 +1,7 @@
 package ru.fadedfog.acrosstars.models.enemies;
 
 import com.badlogic.gdx.math.Polygon;
+import com.badlogic.gdx.math.Vector2;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.Ship;
@@ -24,6 +25,14 @@ public class EnemyShip implements Ship {
 
 	public void attack() {
 		attackBehavior.attack();
+	}
+	
+	public Vector2 getCenterPosition() {
+		float centerX = areaObject.getX() + widthHeight[0] / 2;
+		float centerY = areaObject.getY() + widthHeight[1] / 2;
+		
+		Vector2 result = new Vector2(centerX, centerY);		
+		return result;
 	}
 	
 	public Polygon getAreaObject() {
