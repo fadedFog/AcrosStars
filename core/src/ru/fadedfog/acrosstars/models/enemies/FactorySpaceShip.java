@@ -20,7 +20,6 @@ public class FactorySpaceShip {
 	}
 	
 	public EnemyShip createEnemyShip(TypeEShip typeEShip, float x, float y) {
-		EnemyShip enemyShip;
 		Polygon areaEShip = new Polygon();
 		float[] widthHeight = typeEShip.getAreaEShip();
 		float xOrigin = widthHeight[0] / 2;
@@ -36,9 +35,10 @@ public class FactorySpaceShip {
 		areaEShip.setVertices(areaVertices);
 		areaEShip.setRotation(0);
 		
-		enemyShip = new EnemyShip(typeEShip, typeEShip.getAttackBehaviorEShip(),
+		EnemyShip enemyShip = new EnemyShip(typeEShip, typeEShip.getAttackBehaviorEShip(),
 				config, areaEShip);	
 		enemyShip.setWidthHeight(widthHeight);
+		enemyShip.setSpeed(300f); //TODO to get from enum
 		
 		return enemyShip;
 	}

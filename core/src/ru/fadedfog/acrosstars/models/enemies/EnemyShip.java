@@ -13,6 +13,7 @@ public class EnemyShip implements Ship {
 	private GameConfig config;
 	private float[] widthHeight;
 	private Polygon areaObject;
+	private float speed;
 	
 	public EnemyShip(TypeEShip typeEShip, AttackBehavior attackBehavior,
 			GameConfig config, Polygon areaObject) {
@@ -81,6 +82,14 @@ public class EnemyShip implements Ship {
 	
 	public void setHeight(float height) {
 		widthHeight[1] = height;
+	}
+
+	public float getSpeed() {
+		return speed;
+	}
+
+	public void setSpeed(float speed) {
+		this.speed = speed;
 	}
 	
 }
