@@ -1,6 +1,6 @@
 package ru.fadedfog.acrosstars.models.enemies;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Polygon;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.Ship;
@@ -10,26 +10,27 @@ public class EnemyShip implements Ship {
 	private TypeEShip typeShip;
 	private AttackBehavior attackBehavior;
 	private GameConfig config;
-	private Rectangle areaObject;
+	private float[] widthHeight;
+	private Polygon areaObject;
 	
 	public EnemyShip(TypeEShip typeEShip, AttackBehavior attackBehavior,
-			GameConfig config, Rectangle areaObject) {
+			GameConfig config, Polygon areaObject) {
 		this.typeShip = typeEShip;
 		this.attackBehavior = attackBehavior;
 		this.config = config;
 		this.areaObject = areaObject;
-		attackBehavior.setShip(this);
+		attackBehavior.setEnemyShip(this);
 	}
 
 	public void attack() {
 		attackBehavior.attack();
 	}
 	
-	public Rectangle getAreaObject() {
+	public Polygon getAreaObject() {
 		return areaObject;
 	}
 
-	public void setAreaObject(Rectangle areaObject) {
+	public void setAreaObject(Polygon areaObject) {
 		this.areaObject = areaObject;
 	}
 
@@ -47,6 +48,30 @@ public class EnemyShip implements Ship {
 
 	public void setAttackBehavior(AttackBehavior attackBehavior) {
 		this.attackBehavior = attackBehavior;
+	}
+
+	public float[] getWidthHeight() {
+		return widthHeight;
+	}
+
+	public void setWidthHeight(float[] widthHeight) {
+		this.widthHeight = widthHeight;
+	}
+	
+	public float getWidth() {
+		return widthHeight[0];
+	}
+	
+	public void setWidth(float width) {
+		widthHeight[0] = width;
+	}
+	
+	public float getHeight() {
+		return widthHeight[1];
+	}
+	
+	public void setHeight(float height) {
+		widthHeight[1] = height;
 	}
 	
 }

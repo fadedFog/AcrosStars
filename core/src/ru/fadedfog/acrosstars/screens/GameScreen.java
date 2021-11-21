@@ -174,18 +174,28 @@ public class GameScreen implements Screen {
 		return spriteProjectile;
 	}
 	
-	private void renderEnemyShips() {
+	private void renderEnemyShips() { // TODO change to correct
 		ArrayList<EnemyShip> eShips = (ArrayList<EnemyShip>) game.getEnemyShips();
 		batch.begin();
 		
 		for (EnemyShip eShip: eShips) {
-			float xShape = eShip.getAreaObject().x;
-			float yShape = eShip.getAreaObject().y;
-			float widthShape = eShip.getAreaObject().width;
-			float heigthShape = eShip.getAreaObject().height;
+			float xShipe = eShip.getAreaObject().getX();
+			float yShipe = eShip.getAreaObject().getY();
+			float xOriginShip = eShip.getAreaObject().getOriginX();
+			float yOriginShip = eShip.getAreaObject().getOriginY();
+			float widthShip = eShip.getWidth();
+			float heigthShip = eShip.getHeight();
+			float xScaleShip = eShip.getAreaObject().getScaleX();
+			float yScaleShip = eShip.getAreaObject().getScaleY();
+			float roataionShip = eShip.getAreaObject().getRotation();
 			
 			Sprite spriteEnemyShip = getSpriteEnemyShip(eShip.getTypeShip());
-			batch.draw(spriteEnemyShip, xShape, yShape, widthShape, heigthShape);
+			batch.draw(spriteEnemyShip, 
+					xShipe, yShipe, 
+					xOriginShip, yOriginShip, 
+					widthShip, heigthShip, 
+					xScaleShip, yScaleShip, 
+					roataionShip);
 		}
 		
 		batch.end();

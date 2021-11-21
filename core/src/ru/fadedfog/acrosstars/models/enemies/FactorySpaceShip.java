@@ -1,10 +1,8 @@
 package ru.fadedfog.acrosstars.models.enemies;
 
-import com.badlogic.gdx.math.Rectangle;
+import com.badlogic.gdx.math.Polygon;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
-import ru.fadedfog.acrosstars.models.enemies.attack_behavior.AttackBehavior;
-import ru.fadedfog.acrosstars.models.enemies.attack_behavior.AttackKamikaze;
 
 public class FactorySpaceShip {
 	private static FactorySpaceShip factorySpaceShip;
@@ -21,33 +19,26 @@ public class FactorySpaceShip {
 		return factorySpaceShip;
 	}
 	
-	public EnemyShip createEnemyShip(TypeEShip typeEShip) {
+	public EnemyShip createEnemyShip(TypeEShip typeEShip, float x, float y) {
 		EnemyShip enemyShip;
-		Rectangle areaPawn = new Rectangle();
-		AttackBehavior attackBehavior;
-		switch (typeEShip) {
-			case PAWN:
-				areaPawn.height = config.getHeightEPawn();
-				areaPawn.width = config.getWidthEPawn();
-				attackBehavior = new AttackKamikaze(); // TODO change to pawn attack behavior
-				break;
-			case BASTION:
-				areaPawn.height = config.getHeightEBastion();
-				areaPawn.width = config.getWidthEBastion(); 
-				attackBehavior = new AttackKamikaze(); // TODO change to bastion attack behavior
-				break;
-			case KAMIKAZA:
-				areaPawn.height = config.getHeightEKamikaza();
-				areaPawn.width = config.getWidthEKamikaza();
-				attackBehavior = new AttackKamikaze();
-				break;
-			default:
-				attackBehavior = null;
-				enemyShip = null;
-				break;
-		}
+		Polygon areaEShip = new Polygon();
+		float[] widthHeight = typeEShip.getAreaEShip();
+		float xOrigin = widthHeight[0] / 2;
+		float yOrigin = widthHeight[1] / 2;
+		float[] areaVertices = new float[] {
+				x, y,
+				x, y + widthHeight[1],
+				x + widthHeight[0], y + widthHeight[1],
+				x + widthHeight[0], y
+		};
+		areaEShip.setOrigin(xOrigin, yOrigin);
+		areaEShip.setPosition(x, y);
+		areaEShip.setVertices(areaVertices);
+		areaEShip.setRotation(0);
 		
-		enemyShip = new EnemyShip(typeEShip, attackBehavior, config, areaPawn);		
+		enemyShip = new EnemyShip(typeEShip, typeEShip.getAttackBehaviorEShip(),
+				config, areaEShip);	
+		enemyShip.setWidthHeight(widthHeight);
 		
 		return enemyShip;
 	}

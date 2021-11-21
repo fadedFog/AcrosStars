@@ -7,9 +7,9 @@ public interface AttackBehavior {
 	
 	public void attack();
 
-	public void setShip(EnemyShip ship);
+	public void setEnemyShip(EnemyShip ship);
 	
-	public EnemyShip getShip();
+	public EnemyShip getEnemyShip();
 	
 	public void setGame(AcrosStarsGame game);
 	

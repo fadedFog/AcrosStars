@@ -50,19 +50,19 @@ public class AcrosStarsGame extends ApplicationAdapter {
 	}
 	
 	private void createEnemyShips() { // TODO get map of ships for game
-		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN);
-		pawnDemo.getAreaObject().x = (700f / 2f);
-		pawnDemo.getAreaObject().y = 550f;
+		float x = (700f / 2f);
+		float y = 550f;
+		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN, x, y);
 		pawnDemo.getAttackBehavior().setGame(this);
 		
-		EnemyShip kamikazeDemo = factorySpaceShip.createEnemyShip(TypeEShip.KAMIKAZA);
-		kamikazeDemo.getAreaObject().x = (700f / 2f) - 100f;
-		kamikazeDemo.getAreaObject().y = 550f;
+		x = (700f / 2f) - 100f;
+		y = 550f;
+		EnemyShip kamikazeDemo = factorySpaceShip.createEnemyShip(TypeEShip.KAMIKAZA, x, y);
 		kamikazeDemo.getAttackBehavior().setGame(this);
 		
-		EnemyShip bastionDemo = factorySpaceShip.createEnemyShip(TypeEShip.BASTION);
-		bastionDemo.getAreaObject().x = (700f / 2f) + 100f;
-		bastionDemo.getAreaObject().y = 550f;
+		x = (700f / 2f) + 100f;
+		y = 550f;
+		EnemyShip bastionDemo = factorySpaceShip.createEnemyShip(TypeEShip.BASTION, x, y);
 		bastionDemo.getAttackBehavior().setGame(this);
 		
 		enemyShips.add(pawnDemo);
@@ -81,9 +81,17 @@ public class AcrosStarsGame extends ApplicationAdapter {
 		spaceShip.move();
 		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
+		attackOfEnemies();
 		updateProjectiles();
 		collisionShapeOfBounds();
 	}
+	
+	private void attackOfEnemies() {
+		for (EnemyShip eShip: enemyShips) {
+			eShip.attack();
+		}
+	}
+	
 	private void updateProjectiles() {
 		List<Projectile> projectilesOfSpaceShip = spaceShip.getCannon().getProjectilesOut();
 		for (Projectile projectile: projectilesOfSpaceShip) {

@@ -5,18 +5,24 @@ import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 
 public class AttackKamikaze implements AttackBehavior {
 	private AcrosStarsGame game;
-	private EnemyShip ship;
+	private EnemyShip eShip;
 	
 	public AttackKamikaze() {}
 	
-	public AttackKamikaze(AcrosStarsGame game, EnemyShip ship) {
+	public AttackKamikaze(AcrosStarsGame game, EnemyShip eShip) {
 		this.game = game;
-		this.ship = ship;
+		this.eShip = eShip;
 	}
 
 	@Override
 	public void attack() {
+		float xEShip = eShip.getAreaObject().getX();
+		float yEShip = eShip.getAreaObject().getX();
+		float xShip = game.getSpaceShip().getCenterPosition().x;
+		float yShip = game.getSpaceShip().getCenterPosition().y;
 		
+		System.out.println(xEShip + " " + yEShip);
+		System.out.println(xShip + " " + yShip + " \n");
 	}
 	
 	@Override
@@ -24,12 +30,13 @@ public class AttackKamikaze implements AttackBehavior {
 		this.game = game;
 	}
 
-	public EnemyShip getShip() {
-		return ship;
+	public EnemyShip getEnemyShip() {
+		return eShip;
 	}
 
-	public void setShip(EnemyShip ship) {
-		this.ship = ship;
+	public void setEnemyShip(EnemyShip eShip) {
+		this.eShip = eShip;
 	}
+
 	
 }
