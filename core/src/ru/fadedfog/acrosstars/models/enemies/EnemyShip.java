@@ -5,6 +5,7 @@ import com.badlogic.gdx.math.Vector2;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.Ship;
+import ru.fadedfog.acrosstars.models.cannon.Cannon;
 import ru.fadedfog.acrosstars.models.enemies.attack_behavior.AttackBehavior;
 
 public class EnemyShip implements Ship {
@@ -14,16 +15,41 @@ public class EnemyShip implements Ship {
 	private float[] widthHeight;
 	private Polygon areaObject;
 	private float speed;
+	private Cannon cannon;
 	
-	public EnemyShip(TypeEShip typeEShip, AttackBehavior attackBehavior,
+	public EnemyShip(TypeEShip typeEShip, Cannon cannon, AttackBehavior attackBehavior,
 			GameConfig config, Polygon areaObject) {
 		this.typeShip = typeEShip;
+		this.widthHeight = typeEShip.getAreaEShip();
 		this.attackBehavior = attackBehavior;
 		this.config = config;
 		this.areaObject = areaObject;
+		this.cannon = cannon;
 		attackBehavior.setEnemyShip(this);
+		
+		positioningGun();
 	}
 
+	public void positioningGun() { // TODO Add some vars to config file
+		Polygon areaCannon = cannon.getAreaObject();
+		Vector2 posCenterShip = getCenterPosition();
+		float x = posCenterShip.x - 4f;
+		float y = posCenterShip.y;
+		float width = cannon.getWidth();
+		float height = cannon.getHeight();
+		float xOrigin = cannon.getWidth() / 2;
+		float yOrigin = 0f;
+		float[] areaVertices = new float[] {
+			x, y,
+			x, y + height,
+			x + width, y + height,
+			x + width, y
+		};
+		areaCannon.setOrigin(xOrigin, yOrigin);
+		areaCannon.setPosition(x, y);
+		areaCannon.setVertices(areaVertices);
+	}
+	
 	public void attack() {
 		attackBehavior.attack();
 	}
@@ -90,6 +116,14 @@ public class EnemyShip implements Ship {
 
 	public void setSpeed(float speed) {
 		this.speed = speed;
+	}
+
+	public Cannon getCannon() {
+		return cannon;
+	}
+
+	public void setCannon(Cannon cannon) {
+		this.cannon = cannon;
 	}
 	
 }

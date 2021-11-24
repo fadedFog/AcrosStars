@@ -27,6 +27,7 @@ public class GameScreen implements Screen {
 	private Sprite spriteSpaceShip;
 	private Sprite spriteAssaultGun;
 	private Sprite spriteRocketLauncher;
+	private Sprite spriteNoneGun;
 	private Sprite spriteLaserGun;
 	private Sprite spriteBullet;
 	private Sprite spriteRocket;
@@ -54,6 +55,7 @@ public class GameScreen implements Screen {
 	}
 	
 	private void createSpritesWeapons() {
+		spriteNoneGun = new Sprite(new Texture(Gdx.files.internal("none_gun.png")));
 		spriteAssaultGun = new Sprite(new Texture(Gdx.files.internal("assault_gun.png")));
 		spriteRocketLauncher = new Sprite(new Texture(Gdx.files.internal("rocket_launcher.png")));
 		spriteLaserGun = new Sprite(new Texture(Gdx.files.internal("laser_gun.png")));
@@ -77,8 +79,8 @@ public class GameScreen implements Screen {
 		batch.setProjectionMatrix(game.getCamera().combined);
 		ScreenUtils.clear(RGB[0], RGB[1], RGB[2], alpha);
 		renderSpaceShip();
-		renderWeapons();
 		renderEnemyShips();
+		renderWeapons();
 	}
 	
 	private void renderSpaceShip() {
@@ -95,27 +97,34 @@ public class GameScreen implements Screen {
 	}
 	
 	public void renderWeapons() { //TODO add switch for different cannons and projectiles
+		List<Cannon> cannons = new ArrayList<>();
+		cannons.add(game.getSpaceShip().getCannon());
+		for (EnemyShip eShip: game.getEnemyShips()) {
+			cannons.add(eShip.getCannon());
+		}
+		
 		batch.begin();
 		
-		Cannon cannon = game.getSpaceShip().getCannon();
-		float xGun = cannon.getX();
-		float yGun = cannon.getY();
-		float xOrigin = cannon.getAreaObject().getOriginX();
-		float yOrigin = cannon.getAreaObject().getOriginY();
-		float widthGun = cannon.getWidth();
-		float heigthGun = cannon.getHeight(); 
-		float xScale = cannon.getAreaObject().getScaleX();
-		float yScale = cannon.getAreaObject().getScaleY();
-		float rotation = cannon.getRotation();
-		Sprite spriteCannon = getSpriteCannon(cannon.getTypeCannon());
-		batch.draw(spriteCannon, 
-				xGun, yGun, 
-				xOrigin, yOrigin, 
-				widthGun, heigthGun, 
-				yScale, xScale, 
-				rotation);
+		for (Cannon cannon: cannons) {
+			float xGun = cannon.getX();
+			float yGun = cannon.getY();
+			float xOrigin = cannon.getAreaObject().getOriginX();
+			float yOrigin = cannon.getAreaObject().getOriginY();
+			float widthGun = cannon.getWidth();
+			float heigthGun = cannon.getHeight(); 
+			float xScale = cannon.getAreaObject().getScaleX();
+			float yScale = cannon.getAreaObject().getScaleY();
+			float rotation = cannon.getRotation();
+			Sprite spriteCannon = getSpriteCannon(cannon.getTypeCannon());
+			batch.draw(spriteCannon, 
+					xGun, yGun, 
+					xOrigin, yOrigin, 
+					widthGun, heigthGun, 
+					yScale, xScale, 
+					rotation);
+		}
 		
-		List<Projectile> projectiles = cannon.getProjectilesOut();
+		List<Projectile> projectiles = game.getSpaceShip().getCannon().getProjectilesOut();
 		projectiles.addAll(game.getProjectiles());
 		for (Projectile projectile: projectiles) {
 			float xProjectile = projectile.getX();
@@ -150,8 +159,11 @@ public class GameScreen implements Screen {
 			case LASER_GUN:
 				spriteCannon = spriteLaserGun;
 				break;
-			default:
+			case ASSAULT_GUN:
 				spriteCannon = spriteAssaultGun;
+				break;
+			default:
+				spriteCannon = spriteNoneGun;
 				break;
 		}
 		
@@ -169,8 +181,11 @@ public class GameScreen implements Screen {
 			case LASER:
 				spriteProjectile = spriteLaser;
 				break;
-			default:
+			case BULLET_ASSAULT:
 				spriteProjectile = spriteBullet;
+				break;
+			default:
+				spriteProjectile = null; //TODO change null
 				break;
 		}
 		

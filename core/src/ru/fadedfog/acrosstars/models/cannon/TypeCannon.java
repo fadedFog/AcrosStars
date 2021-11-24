@@ -40,6 +40,18 @@ public enum TypeCannon {
 			return new float[] {config.getWidthLasertGun(),
 								config.getHeightLaserGun()};
 		}
+	},
+	NONE {
+		@Override
+		public TypeProjectile getTypeProjectile() {
+			return TypeProjectile.NONE_PROJECTILE;
+		}
+
+		@Override
+		public float[] getAreaCannon() {
+			return new float[] {config.getWidthLasertGun(),
+								config.getHeightLaserGun()};
+		}
 	};
 	
 	protected GameConfig config = GameConfig.getInstance();
