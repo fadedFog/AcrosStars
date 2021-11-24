@@ -21,13 +21,25 @@ import ru.fadedfog.acrosstars.models.projectile.Projectile;
 import ru.fadedfog.acrosstars.screens.GameScreen;
 
 public class AcrosStarsGame extends ApplicationAdapter {
+	private static AcrosStarsGame game;
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private GameConfig config;
 	private GameScreen gameScreen;
 	private FactorySpaceShip factorySpaceShip;
 	private SpaceShip spaceShip;
+	private List<Projectile> projectiles;
 	private List<EnemyShip> enemyShips;
+	
+	private AcrosStarsGame() {
+	}
+	
+	public static AcrosStarsGame getInstance() {
+		if (game == null) {
+			game = new AcrosStarsGame();
+		}
+		return game;
+	}
 	
 	@Override
 	public void create () {
@@ -35,6 +47,7 @@ public class AcrosStarsGame extends ApplicationAdapter {
 		createCameraViewport();
 		factorySpaceShip = FactorySpaceShip.getInstance();
 		spaceShip = new SpaceShip();
+		projectiles = new ArrayList<>();
 		enemyShips = new ArrayList<EnemyShip>();
 		createEnemyShips();
 		gameScreen = new GameScreen(this);
@@ -98,6 +111,11 @@ public class AcrosStarsGame extends ApplicationAdapter {
 			projectile.fly();
 		}
 		removeProjectiles(projectilesOfSpaceShip);
+		
+		for (Projectile projectile: projectiles) {
+			projectile.fly();
+		}
+		removeProjectiles(projectiles);
 	}
 	
 	private void removeProjectiles(List<Projectile> projectiles) {
@@ -175,4 +193,16 @@ public class AcrosStarsGame extends ApplicationAdapter {
 		this.viewport = viewport;
 	}
 
+	public List<Projectile> getProjectiles() {
+		return projectiles;
+	}
+
+	public void setProjectiles(List<Projectile> projectiles) {
+		this.projectiles = projectiles;
+	}
+
+	public void addProjectile(Projectile projectile) {
+		projectiles.add(projectile);
+	}
+	
 }

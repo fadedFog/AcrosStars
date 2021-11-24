@@ -6,10 +6,12 @@ import java.util.List;
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 
+import ru.fadedfog.acrosstars.AcrosStarsGame;
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
 import ru.fadedfog.acrosstars.movements.MovementCannon;
 
 public class Cannon {
+	private AcrosStarsGame game;
 	private Polygon areaObject;
 	private float[] widthHeight;
 	private TypeCannon typeCannon;
@@ -17,6 +19,7 @@ public class Cannon {
 	private MovementCannon movement;
 	
 	public Cannon(TypeCannon typeCannon) {
+		game = AcrosStarsGame.getInstance();
 		this.typeCannon = typeCannon;
 		widthHeight = typeCannon.getAreaCannon();
 		areaObject = new Polygon();
@@ -32,6 +35,7 @@ public class Cannon {
 		Projectile projectile = new Projectile(typeCannon.getTypeProjectile());
 		positioningBullet(projectile);
 		projectilesOut.add(projectile);
+		game.addProjectile(projectile);
 	}
 	
 	private void positioningBullet(Projectile projectile) {

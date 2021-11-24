@@ -16,6 +16,6 @@ public class DesktopLauncher {
 		config.height = gameConfig.getHeightWindowGame();
 		config.y = gameConfig.getyWindowGame();
 		config.resizable = gameConfig.isResizable();
-		new LwjglApplication(new AcrosStarsGame(), config);
+		new LwjglApplication(AcrosStarsGame.getInstance(), config);
 	}
 }

@@ -1,6 +1,7 @@
 package ru.fadedfog.acrosstars.screens;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
@@ -114,7 +115,9 @@ public class GameScreen implements Screen {
 				yScale, xScale, 
 				rotation);
 		
-		for (Projectile projectile: cannon.getProjectilesOut()) {
+		List<Projectile> projectiles = cannon.getProjectilesOut();
+		projectiles.addAll(game.getProjectiles());
+		for (Projectile projectile: projectiles) {
 			float xProjectile = projectile.getX();
 			float yProjectile = projectile.getY();
 			float xOriginProjectile = projectile.getAreaObject().getOriginX();

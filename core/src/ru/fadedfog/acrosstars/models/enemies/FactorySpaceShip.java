@@ -33,12 +33,13 @@ public class FactorySpaceShip {
 		areaEShip.setOrigin(xOrigin, yOrigin);
 		areaEShip.setPosition(x, y);
 		areaEShip.setVertices(areaVertices);
-		areaEShip.setRotation(0);
+		areaEShip.setRotation(180);
 		
 		EnemyShip enemyShip = new EnemyShip(typeEShip, typeEShip.getAttackBehaviorEShip(),
 				config, areaEShip);	
 		enemyShip.setWidthHeight(widthHeight);
-		enemyShip.setSpeed(300f); //TODO to get from enum
+//		enemyShip.setSpeed(300f); //TODO to get from enum 1) Kamikaze
+		enemyShip.setSpeed(100f);
 		
 		return enemyShip;
 	}
