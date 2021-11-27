@@ -20,14 +20,26 @@ import ru.fadedfog.acrosstars.models.enemies.TypeEShip;
 import ru.fadedfog.acrosstars.models.projectile.Projectile;
 import ru.fadedfog.acrosstars.screens.GameScreen;
 
-public class AcrosStartsGame extends ApplicationAdapter {
+public class AcrosStarsGame extends ApplicationAdapter {
+	private static AcrosStarsGame game;
 	private OrthographicCamera camera;
 	private Viewport viewport;
 	private GameConfig config;
 	private GameScreen gameScreen;
 	private FactorySpaceShip factorySpaceShip;
 	private SpaceShip spaceShip;
+	private List<Projectile> projectiles;
 	private List<EnemyShip> enemyShips;
+	
+	private AcrosStarsGame() {
+	}
+	
+	public static AcrosStarsGame getInstance() {
+		if (game == null) {
+			game = new AcrosStarsGame();
+		}
+		return game;
+	}
 	
 	@Override
 	public void create () {
@@ -35,6 +47,7 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		createCameraViewport();
 		factorySpaceShip = FactorySpaceShip.getInstance();
 		spaceShip = new SpaceShip();
+		projectiles = new ArrayList<>();
 		enemyShips = new ArrayList<EnemyShip>();
 		createEnemyShips();
 		gameScreen = new GameScreen(this);
@@ -50,17 +63,20 @@ public class AcrosStartsGame extends ApplicationAdapter {
 	}
 	
 	private void createEnemyShips() { // TODO get map of ships for game
-		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN);
-		pawnDemo.getAreaObject().x = (700f / 2f);
-		pawnDemo.getAreaObject().y = 550f;
+		float x = (700f / 2f);
+		float y = 550f;
+		EnemyShip pawnDemo = factorySpaceShip.createEnemyShip(TypeEShip.PAWN, x, y);
+		pawnDemo.getAttackBehavior().setGame(this);
 		
-		EnemyShip kamikazeDemo = factorySpaceShip.createEnemyShip(TypeEShip.KAMIKAZA);
-		kamikazeDemo.getAreaObject().x = (700f / 2f) - 100f;
-		kamikazeDemo.getAreaObject().y = 550f;
+		x = (700f / 2f) - 100f;
+		y = 550f;
+		EnemyShip kamikazeDemo = factorySpaceShip.createEnemyShip(TypeEShip.KAMIKAZA, x, y);
+		kamikazeDemo.getAttackBehavior().setGame(this);
 		
-		EnemyShip bastionDemo = factorySpaceShip.createEnemyShip(TypeEShip.BASTION);
-		bastionDemo.getAreaObject().x = (700f / 2f) + 100f;
-		bastionDemo.getAreaObject().y = 550f;
+		x = (700f / 2f) + 100f;
+		y = 550f;
+		EnemyShip bastionDemo = factorySpaceShip.createEnemyShip(TypeEShip.BASTION, x, y);
+		bastionDemo.getAttackBehavior().setGame(this);
 		
 		enemyShips.add(pawnDemo);
 		enemyShips.add(kamikazeDemo);
@@ -78,15 +94,28 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		spaceShip.move();
 		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
+		attackOfEnemies();
 		updateProjectiles();
 		collisionShapeOfBounds();
 	}
+	
+	private void attackOfEnemies() {
+		for (EnemyShip eShip: enemyShips) {
+			eShip.attack();
+		}
+	}
+	
 	private void updateProjectiles() {
 		List<Projectile> projectilesOfSpaceShip = spaceShip.getCannon().getProjectilesOut();
 		for (Projectile projectile: projectilesOfSpaceShip) {
 			projectile.fly();
 		}
 		removeProjectiles(projectilesOfSpaceShip);
+		
+		for (Projectile projectile: projectiles) {
+			projectile.fly();
+		}
+		removeProjectiles(projectiles);
 	}
 	
 	private void removeProjectiles(List<Projectile> projectiles) {
@@ -164,4 +193,16 @@ public class AcrosStartsGame extends ApplicationAdapter {
 		this.viewport = viewport;
 	}
 
+	public List<Projectile> getProjectiles() {
+		return projectiles;
+	}
+
+	public void setProjectiles(List<Projectile> projectiles) {
+		this.projectiles = projectiles;
+	}
+
+	public void addProjectile(Projectile projectile) {
+		projectiles.add(projectile);
+	}
+	
 }

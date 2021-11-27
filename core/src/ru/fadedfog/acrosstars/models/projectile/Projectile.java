@@ -23,7 +23,7 @@ public class Projectile {
 		widthHeight = typeProjectile.getAreaCannon();
 		areaObject = new Polygon();
 		vectorDirection = new Vector2(0, 0);
-		speedProjectile = 500f; // if BulletAssault
+		speedProjectile = 50f; // if BulletAssault
 //		speedProjectile = 400f; // if Rocket
 	}
 	

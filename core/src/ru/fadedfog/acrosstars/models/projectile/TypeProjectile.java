@@ -4,6 +4,7 @@ import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.BulletBehavior;
 import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.FlyBehaviorProjectile;
 import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.LaserBehavior;
+import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.NoneProjectileBehavior;
 import ru.fadedfog.acrosstars.models.projectile.fly_projectile_behavior.RocketBehavior;
 
 public enum TypeProjectile {
@@ -41,6 +42,17 @@ public enum TypeProjectile {
 		public float[] getAreaCannon() {
 			return new float[] {config.getWidthLaser(),
 								config.getHeightLaser()};
+		}
+	},
+	NONE_PROJECTILE {
+		@Override
+		public FlyBehaviorProjectile getFlyBehaviorProjectile() {
+			return new NoneProjectileBehavior();
+		}
+
+		@Override
+		public float[] getAreaCannon() {
+			return new float[] {0, 0};
 		}
 	};
 	
