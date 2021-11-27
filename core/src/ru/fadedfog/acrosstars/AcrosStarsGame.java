@@ -95,6 +95,7 @@ public class AcrosStarsGame extends ApplicationAdapter {
 		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
 		attackOfEnemies();
+		moveOfEnemies();
 		updateProjectiles();
 		collisionShapeOfBounds();
 	}
@@ -104,6 +105,12 @@ public class AcrosStarsGame extends ApplicationAdapter {
 			eShip.attack();
 		}
 	}
+	
+	private void moveOfEnemies() {
+		for (EnemyShip eShip: enemyShips) {
+			eShip.move();
+		}
+	} 
 	
 	private void updateProjectiles() {
 		List<Projectile> projectilesOfSpaceShip = spaceShip.getCannon().getProjectilesOut();

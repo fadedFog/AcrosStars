@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Polygon;
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.cannon.Cannon;
 import ru.fadedfog.acrosstars.models.cannon.TypeCannon;
+import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveBehavior;
+import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveDown;
 
 public class FactorySpaceShip {
 	private static FactorySpaceShip factorySpaceShip;
@@ -42,8 +44,11 @@ public class FactorySpaceShip {
 			cannon = new Cannon(TypeCannon.ASSAULT_GUN);
 		} 
 		
+		MoveBehavior moveBehavior = typeEShip.getMoveBehaviorEShip();
+		
 		EnemyShip enemyShip = new EnemyShip(typeEShip, cannon, typeEShip.getAttackBehaviorEShip(),
-				config, areaEShip);	
+				moveBehavior, config, areaEShip);
+		moveBehavior.setEnemyShip(enemyShip);
 		enemyShip.setWidthHeight(widthHeight);
 		enemyShip.setSpeed(100f);
 
