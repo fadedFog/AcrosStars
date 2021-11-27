@@ -13,6 +13,7 @@ public class AttackAimAndShoot implements AttackBehavior {
 	private final float STRAIGHT_CORNE = 90f;
 	private AcrosStarsGame game;
 	private EnemyShip ship;
+	private long startTime;
 	
 	public AttackAimAndShoot() {}
 	
@@ -43,7 +44,14 @@ public class AttackAimAndShoot implements AttackBehavior {
 	}
 	
 	private void shoot(Vector2 vecShip, Vector2 vecCannon, Cannon enemyCannon) {
-		enemyCannon.shoot();
+		if (System.currentTimeMillis() - startTime > 700l) {
+			enemyCannon.shoot();
+			setVecDirectionProjectile(vecShip, vecCannon, enemyCannon);
+			startTime = System.currentTimeMillis();
+		}
+	}
+	
+	private void setVecDirectionProjectile(Vector2 vecShip, Vector2 vecCannon, Cannon enemyCannon) {
 		int lastId = enemyCannon.getProjectilesOut().size() - 1;
 		Projectile lastProjectile = enemyCannon.getProjectilesOut().get(lastId);
 		Vector2 vecDirection = vecShip.sub(vecCannon).nor();

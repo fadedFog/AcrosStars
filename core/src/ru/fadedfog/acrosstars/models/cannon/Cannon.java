@@ -45,7 +45,7 @@ public class Cannon {
 		float y = areaObject.getY() + widthHeight[1];
 		float width = projectile.getWidth();
 		float height = projectile.getHeight();
-		float xOrigin = 0;
+		float xOrigin = 1;
 		float yOrigin = -getHeight();
 		float[] areaVertices = new float[] {
 			x, y,
