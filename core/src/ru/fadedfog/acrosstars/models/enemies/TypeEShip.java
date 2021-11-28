@@ -6,6 +6,7 @@ import ru.fadedfog.acrosstars.models.enemies.attack_behavior.AttackBehavior;
 import ru.fadedfog.acrosstars.models.enemies.attack_behavior.AttackUnidirectional;
 import ru.fadedfog.acrosstars.models.enemies.attack_behavior.WithoutAttack;
 import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveBehavior;
+import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveChaotic;
 import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveDown;
 import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveKamikaze;
 
@@ -58,7 +59,7 @@ public enum TypeEShip {
 
 		@Override
 		public MoveBehavior getMoveBehaviorEShip() {
-			return new MoveDown();
+			return new MoveChaotic();
 		}
 	};
 	
