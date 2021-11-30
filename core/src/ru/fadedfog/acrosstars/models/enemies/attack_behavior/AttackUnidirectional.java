@@ -18,11 +18,6 @@ public class AttackUnidirectional implements AttackBehavior {
 		typeProjectile = TypeProjectile.BULLET_ASSAULT;
 	}
 	
-	public AttackUnidirectional(AcrosStarsGame game, EnemyShip eShip) {
-		this.game = game;
-		this.eShip = eShip;
-	}
-
 	@Override
 	public void attack() {
 		if (isTimeShoot()) {

@@ -13,28 +13,49 @@ public class AttackAimAndShoot implements AttackBehavior {
 	private final float STRAIGHT_CORNE = 90f;
 	private AcrosStarsGame game;
 	private EnemyShip ship;
+	private Vector2 lastPosShip;
 	private long startTime;
 	
-	public AttackAimAndShoot() {}
-	
-	public AttackAimAndShoot(AcrosStarsGame game, EnemyShip ship) {
-		this.game = game;
-		this.ship = ship;
+	public AttackAimAndShoot() {
+		lastPosShip = new Vector2();
 	}
-
+	
 	@Override
 	public void attack() {
+		if (startTime == 0) {
+			startTime = System.currentTimeMillis();
+		}
+		
 		SpaceShip spaceShip = game.getSpaceShip();
 		Cannon enemyCannon = ship.getCannon();
-		float xShip = spaceShip.getCenterPosition().x;
-		float yShip = spaceShip.getCenterPosition().y;
 		float xCannon = enemyCannon.getX();
 		float yCannon = enemyCannon.getY();
-		Vector2 vecShip = new Vector2(xShip, yShip);
+		Vector2 vecShip = positionSpaceShip(spaceShip);
 		Vector2 vecCannon = new Vector2(xCannon, yCannon);
 		
-		enemyCannon.getAreaObject().setRotation(aiming(vecShip, vecCannon));
-		shoot(vecShip, vecCannon, enemyCannon);
+		
+		if (System.currentTimeMillis() - startTime < 1000l) {
+			enemyCannon.getAreaObject().setRotation(aiming(vecShip, vecCannon));
+		}
+		
+		if (System.currentTimeMillis() - startTime > 1500l) {
+			shoot(vecShip, vecCannon, enemyCannon);
+		}
+	}
+	
+	private Vector2 positionSpaceShip(SpaceShip spaceShip) {
+		float xShip;
+		float yShip;
+		if (System.currentTimeMillis() - startTime < 1000l) {
+			xShip = spaceShip.getCenterPosition().x;
+			yShip = spaceShip.getCenterPosition().y;
+			lastPosShip.set(xShip, yShip);
+		} else {
+			xShip = lastPosShip.x;
+			yShip = lastPosShip.y;
+		}
+		
+		return new Vector2(xShip, yShip);
 	}
 	
 	private float aiming(Vector2 vecShip, Vector2 vecCannon) {
@@ -44,11 +65,9 @@ public class AttackAimAndShoot implements AttackBehavior {
 	}
 	
 	private void shoot(Vector2 vecShip, Vector2 vecCannon, Cannon enemyCannon) {
-		if (System.currentTimeMillis() - startTime > 700l) {
-			enemyCannon.shoot();
-			setVecDirectionProjectile(vecShip, vecCannon, enemyCannon);
-			startTime = System.currentTimeMillis();
-		}
+		enemyCannon.shoot();
+		setVecDirectionProjectile(vecShip, vecCannon, enemyCannon);
+		startTime = System.currentTimeMillis();
 	}
 	
 	private void setVecDirectionProjectile(Vector2 vecShip, Vector2 vecCannon, Cannon enemyCannon) {
