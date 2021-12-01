@@ -1,11 +1,13 @@
 package ru.fadedfog.acrosstars.models.enemies;
 
+
 import com.badlogic.gdx.math.Polygon;
 
 import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.cannon.Cannon;
 import ru.fadedfog.acrosstars.models.cannon.TypeCannon;
 import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveBehavior;
+import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveKamikaze;
 
 public class FactorySpaceShip {
 	private static FactorySpaceShip factorySpaceShip;
@@ -28,10 +30,10 @@ public class FactorySpaceShip {
 		float xOrigin = widthHeight[0] / 2;
 		float yOrigin = widthHeight[1] / 2;
 		float[] areaVertices = new float[] {
-				x, y,
-				x, y + widthHeight[1],
-				x + widthHeight[0], y + widthHeight[1],
-				x + widthHeight[0], y
+				0, 0,
+				0, widthHeight[1],
+				widthHeight[0], widthHeight[1],
+				widthHeight[0], 0
 		};
 		areaEShip.setOrigin(xOrigin, yOrigin);
 		areaEShip.setPosition(x, y);
@@ -42,7 +44,8 @@ public class FactorySpaceShip {
 			cannon = new Cannon(TypeCannon.ASSAULT_GUN);
 		} 
 		
-		MoveBehavior moveBehavior = typeEShip.getMoveBehaviorEShip();
+//		MoveBehavior moveBehavior = typeEShip.getMoveBehaviorEShip();
+		MoveBehavior moveBehavior = new MoveKamikaze();
 		
 		EnemyShip enemyShip = new EnemyShip(typeEShip, cannon, typeEShip.getAttackBehaviorEShip(),
 				moveBehavior, config, areaEShip);

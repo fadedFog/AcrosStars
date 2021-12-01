@@ -1,5 +1,6 @@
 package ru.fadedfog.acrosstars.models.enemies.attack_behavior;
 
+
 import com.badlogic.gdx.math.Polygon;
 import com.badlogic.gdx.math.Vector2;
 
@@ -39,8 +40,15 @@ public class AttackUnidirectional implements AttackBehavior {
 	
 	private void positioningBullet(Projectile projectile) {
 		Polygon areaProjectile = projectile.getAreaObject();
-		float x = eShip.getAreaObject().getX() + eShip.getWidth() / 2f;
-		float y = eShip.getAreaObject().getY();
+		
+		float[] verticesOfShip = eShip.getAreaObject().getTransformedVertices();
+		Vector2 posFirst = new Vector2(verticesOfShip[0], verticesOfShip[1]);
+		Vector2 posLast = new Vector2(verticesOfShip[6], verticesOfShip[7]);
+		Vector2 distance = new Vector2(posFirst.x - posLast.x, posFirst.y - posLast.y);
+		
+		float x = posFirst.x + (distance.x / 2 * -1);
+		float y = posFirst.y + (distance.y / 2 * -1);
+		
 		float width = projectile.getWidth();
 		float height = projectile.getHeight();
 		float xOrigin = 0;
@@ -55,6 +63,8 @@ public class AttackUnidirectional implements AttackBehavior {
 		areaProjectile.setPosition(x, y);
 		areaProjectile.setVertices(areaVertices);
 		projectile.setSpeedProjectile(30f);
+		
+		System.out.println();
 	}
 	
 	@Override
