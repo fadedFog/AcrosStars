@@ -1,4 +1,4 @@
-package ru.fadedfog.acrosstars.models.enemies.attack_behavior;
+package ru.fadedfog.acrosstars.models.enemies.move_behavior;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.MathUtils;
@@ -8,28 +8,21 @@ import ru.fadedfog.acrosstars.AcrosStarsGame;
 import ru.fadedfog.acrosstars.models.SpaceShip;
 import ru.fadedfog.acrosstars.models.enemies.EnemyShip;
 
-public class AttackKamikaze implements AttackBehavior {
-	private AcrosStarsGame game;
-	private EnemyShip eShip;
-	private SpaceShip spaceShip;
+public class MoveKamikaze implements MoveBehavior {
 	private final float STRAIGHT_CORNE = 90f;
+	private EnemyShip enemyShip;
+	private SpaceShip spaceShip;
 	private Vector2 vectorDirection;
 	private long startTime;
 	
-	public AttackKamikaze() {
+	public MoveKamikaze() {
+		AcrosStarsGame game = AcrosStarsGame.getInstance();
+		spaceShip = game.getSpaceShip();
 		vectorDirection = new Vector2();
 	}
 	
-	public AttackKamikaze(AcrosStarsGame game, EnemyShip eShip) {
-		this.game = game;
-		this.eShip = eShip;
-	}
-
 	@Override
-	public void attack() {
-		if (spaceShip == null) {
-			spaceShip = game.getSpaceShip();
-		}
+	public void move() {
 		if(startTime == 0) {
 			startTime = System.currentTimeMillis();
 		}
@@ -41,49 +34,44 @@ public class AttackKamikaze implements AttackBehavior {
 			rotateEShip();
 			updateDirecton();
 		}
+	}
+	
+	private void moveEShip() {
+		float xEShip = enemyShip.getAreaObject().getX();
+		float yEShip = enemyShip.getAreaObject().getY();
+		xEShip += vectorDirection.x * enemyShip.getSpeed() * Gdx.graphics.getDeltaTime();
+		yEShip += vectorDirection.y * enemyShip.getSpeed() * Gdx.graphics.getDeltaTime();
 		
+		enemyShip.getAreaObject().setPosition(xEShip, yEShip);
 	}
 	
 	private void rotateEShip() {
-		Vector2 centerEShip = eShip.getCenterPosition();
-		float xCShip = game.getSpaceShip().getCenterPosition().x; 
+		Vector2 centerEShip = enemyShip.getCenterPosition();
+		float xCShip = spaceShip.getCenterPosition().x; 
 		float yCShip = spaceShip.getCenterPosition().y;
 
 		float angle = MathUtils.radiansToDegrees * MathUtils.atan2(centerEShip.y - yCShip, centerEShip.x - xCShip);
 		angle -= STRAIGHT_CORNE;
-		eShip.getAreaObject().setRotation(angle);
+		enemyShip.getAreaObject().setRotation(angle);
 	}
-	
+
 	private void updateDirecton() {
-		float xEShip = eShip.getAreaObject().getX();
-		float yEShip = eShip.getAreaObject().getY();
+		float xEShip = enemyShip.getAreaObject().getX();
+		float yEShip = enemyShip.getAreaObject().getY();
 		Vector2 posShip = new Vector2(spaceShip.getAreaObject().x, spaceShip.getAreaObject().y);
 		Vector2 posEShip = new Vector2(xEShip, yEShip);
 		
 		vectorDirection.set(posShip.sub(posEShip).nor());
 	}
 	
-	private void moveEShip() {
-		float xEShip = eShip.getAreaObject().getX();
-		float yEShip = eShip.getAreaObject().getY();
-		xEShip += vectorDirection.x * eShip.getSpeed() * Gdx.graphics.getDeltaTime();
-		yEShip += vectorDirection.y * eShip.getSpeed() * Gdx.graphics.getDeltaTime();
-		
-		eShip.getAreaObject().setPosition(xEShip, yEShip);
-	}
-	
 	@Override
-	public void setGame(AcrosStarsGame game) {
-		this.game = game;
+	public void setEnemyShip(EnemyShip ship) {
+		this.enemyShip = ship;
 	}
 
+	@Override
 	public EnemyShip getEnemyShip() {
-		return eShip;
+		return enemyShip;
 	}
-
-	public void setEnemyShip(EnemyShip eShip) {
-		this.eShip = eShip;
-	}
-
 	
 }

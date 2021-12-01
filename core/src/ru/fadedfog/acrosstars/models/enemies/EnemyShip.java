@@ -7,21 +7,24 @@ import ru.fadedfog.acrosstars.config.GameConfig;
 import ru.fadedfog.acrosstars.models.Ship;
 import ru.fadedfog.acrosstars.models.cannon.Cannon;
 import ru.fadedfog.acrosstars.models.enemies.attack_behavior.AttackBehavior;
+import ru.fadedfog.acrosstars.models.enemies.move_behavior.MoveBehavior;
 
 public class EnemyShip implements Ship {
 	private TypeEShip typeShip;
 	private AttackBehavior attackBehavior;
+	private MoveBehavior moveBehavior;
+	private Cannon cannon;
 	private GameConfig config;
 	private float[] widthHeight;
 	private Polygon areaObject;
 	private float speed;
-	private Cannon cannon;
 	
 	public EnemyShip(TypeEShip typeEShip, Cannon cannon, AttackBehavior attackBehavior,
-			GameConfig config, Polygon areaObject) {
+			MoveBehavior moveBehavior, GameConfig config, Polygon areaObject) {
 		this.typeShip = typeEShip;
 		this.widthHeight = typeEShip.getAreaEShip();
 		this.attackBehavior = attackBehavior;
+		this.moveBehavior = moveBehavior;
 		this.config = config;
 		this.areaObject = areaObject;
 		this.cannon = cannon;
@@ -52,6 +55,11 @@ public class EnemyShip implements Ship {
 	
 	public void attack() {
 		attackBehavior.attack();
+	}
+	
+	public void move() {
+		moveBehavior.move();
+		positioningGun();
 	}
 	
 	public Vector2 getCenterPosition() {
@@ -124,6 +132,14 @@ public class EnemyShip implements Ship {
 
 	public void setCannon(Cannon cannon) {
 		this.cannon = cannon;
+	}
+
+	public MoveBehavior getMoveBehavior() {
+		return moveBehavior;
+	}
+
+	public void setMoveBehavior(MoveBehavior moveBehavior) {
+		this.moveBehavior = moveBehavior;
 	}
 	
 }
