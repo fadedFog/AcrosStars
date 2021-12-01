@@ -69,5 +69,13 @@ public class AttackUnidirectional implements AttackBehavior {
 	public void setEnemyShip(EnemyShip eShip) {
 		this.eShip = eShip;
 	}
+
+	@Override
+	public void setTimeAim(float time) {
+	}
+
+	@Override
+	public void setTimeToShoot(float time) {
+	}
 	
 }

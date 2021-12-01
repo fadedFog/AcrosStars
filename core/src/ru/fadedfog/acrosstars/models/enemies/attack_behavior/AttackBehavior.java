@@ -13,4 +13,8 @@ public interface AttackBehavior {
 	
 	public void setGame(AcrosStarsGame game);
 	
+	public void setTimeAim(float time);
+	
+	public void setTimeToShoot(float time);
+	
 }

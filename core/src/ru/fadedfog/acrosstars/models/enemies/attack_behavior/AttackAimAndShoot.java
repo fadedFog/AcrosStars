@@ -15,9 +15,13 @@ public class AttackAimAndShoot implements AttackBehavior {
 	private EnemyShip ship;
 	private Vector2 lastPosShip;
 	private long startTime;
+	private float timeAim;
+	private float timeToShoot;
 	
 	public AttackAimAndShoot() {
 		lastPosShip = new Vector2();
+		timeAim = 1f;
+		timeToShoot = 1.5f;
 	}
 	
 	@Override
@@ -34,11 +38,11 @@ public class AttackAimAndShoot implements AttackBehavior {
 		Vector2 vecCannon = new Vector2(xCannon, yCannon);
 		
 		
-		if (System.currentTimeMillis() - startTime < 1000l) {
+		if (System.currentTimeMillis() - startTime < timeAim * 1000l) {
 			enemyCannon.getAreaObject().setRotation(aiming(vecShip, vecCannon));
 		}
 		
-		if (System.currentTimeMillis() - startTime > 1500l) {
+		if (System.currentTimeMillis() - startTime > timeToShoot * 1500l) {
 			shoot(vecShip, vecCannon, enemyCannon);
 		}
 	}
@@ -46,7 +50,7 @@ public class AttackAimAndShoot implements AttackBehavior {
 	private Vector2 positionSpaceShip(SpaceShip spaceShip) {
 		float xShip;
 		float yShip;
-		if (System.currentTimeMillis() - startTime < 1000l) {
+		if (System.currentTimeMillis() - startTime < timeAim * 1000l) {
 			xShip = spaceShip.getCenterPosition().x;
 			yShip = spaceShip.getCenterPosition().y;
 			lastPosShip.set(xShip, yShip);
@@ -88,6 +92,16 @@ public class AttackAimAndShoot implements AttackBehavior {
 
 	public void setEnemyShip(EnemyShip ship) {
 		this.ship = ship;
+	}
+
+	@Override
+	public void setTimeAim(float time) {
+		timeAim = time;
+	}
+
+	@Override
+	public void setTimeToShoot(float time) {
+		timeToShoot = time;
 	}
 	
 }
