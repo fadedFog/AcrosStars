@@ -25,4 +25,12 @@ public class WithoutAttack implements AttackBehavior{
 		
 	}
 
+	@Override
+	public void setTimeAim(float time) {
+	}
+
+	@Override
+	public void setTimeToShoot(float time) {
+	}
+
 }
