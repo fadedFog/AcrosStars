@@ -33,12 +33,12 @@ public class Cannon {
 	
 	public void shoot() {
 		Projectile projectile = new Projectile(typeCannon.getTypeProjectile());
-		positioningBullet(projectile);
+		positioningProjectile(projectile);
 		projectilesOut.add(projectile);
 		game.addProjectile(projectile);
 	}
 	
-	private void positioningBullet(Projectile projectile) {
+	private void positioningProjectile(Projectile projectile) {
 		updateWidthAndHeight();
 		Polygon areaProjectile = projectile.getAreaObject();
 		float x = areaObject.getX() + widthHeight[0] / 2.5f;

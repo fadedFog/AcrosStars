@@ -8,6 +8,8 @@ import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer.ShapeType;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 import ru.fadedfog.acrosstars.AcrosStarsGame;
@@ -23,6 +25,9 @@ import ru.fadedfog.acrosstars.models.projectile.TypeProjectile;
 public class GameScreen implements Screen {
 	private GameConfig config;
 	private SpriteBatch batch;
+	
+	private ShapeRenderer shapeRenderer;
+	
 	private AcrosStarsGame game;
 	private Sprite spriteSpaceShip;
 	private Sprite spriteAssaultGun;
@@ -44,6 +49,9 @@ public class GameScreen implements Screen {
 		alpha = config.getStartingAlfaBG();
 		batch = new SpriteBatch();
 		this.game = game;
+
+		shapeRenderer = new ShapeRenderer();
+		shapeRenderer.setProjectionMatrix(game.getCamera().combined);
 		
 		createSprites();
 	}
@@ -196,6 +204,9 @@ public class GameScreen implements Screen {
 		ArrayList<EnemyShip> eShips = (ArrayList<EnemyShip>) game.getEnemyShips();
 		batch.begin();
 		
+		shapeRenderer.begin(ShapeType.Line);
+		shapeRenderer.setColor(0, 1, 0, 1);
+		
 		for (EnemyShip eShip: eShips) {
 			float xShipe = eShip.getAreaObject().getX();
 			float yShipe = eShip.getAreaObject().getY();
@@ -214,8 +225,11 @@ public class GameScreen implements Screen {
 					widthShip, heigthShip, 
 					xScaleShip, yScaleShip, 
 					roataionShip);
+			
+			shapeRenderer.polygon(eShip.getAreaObject().getTransformedVertices());
 		}
 		
+		shapeRenderer.end();
 		batch.end();
 	}
 	
