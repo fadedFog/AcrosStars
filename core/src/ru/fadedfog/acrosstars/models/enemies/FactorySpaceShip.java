@@ -51,6 +51,7 @@ public class FactorySpaceShip {
 		moveBehavior.setEnemyShip(enemyShip);
 		enemyShip.setWidthHeight(widthHeight);
 		enemyShip.setSpeed(100f);
+		enemyShip.setHP(typeEShip.getHpEnemyShip());
 
 		return enemyShip;
 	}

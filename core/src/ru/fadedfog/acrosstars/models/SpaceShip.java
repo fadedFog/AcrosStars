@@ -11,12 +11,14 @@ import ru.fadedfog.acrosstars.movements.MovementSpaceShip;
 
 public class SpaceShip implements Ship {
 	private GameConfig config;
+	private float hp;
 	private Rectangle areaObject;
 	private MovementSpaceShip movement;
 	private Cannon cannon;
 
 	public SpaceShip() {
 		config = GameConfig.getInstance();
+		hp = config.getHpSpaceShip();
 		areaObject = new Rectangle();
 		areaObject.height = config.getHeightSpaceShip();
 		areaObject.width = config.getWidthSpaceShip();
@@ -83,6 +85,16 @@ public class SpaceShip implements Ship {
 
 	public void setCannon(Cannon cannon) {
 		this.cannon = cannon;
+	}
+
+	@Override
+	public float getHP() {
+		return hp;
+	}
+
+	@Override
+	public void setHP(float hp) {
+		this.hp = hp;
 	}
 	
 }
