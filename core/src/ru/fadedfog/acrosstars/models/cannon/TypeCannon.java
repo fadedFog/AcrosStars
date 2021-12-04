@@ -16,6 +16,11 @@ public enum TypeCannon {
 								config.getHeightAssaultGun()};
 		}
 
+		@Override
+		public int getStandartAmmo() {
+			return 10;
+		}
+
 	},
 	ROCKET_LAUNCHER {
 		@Override
@@ -27,6 +32,11 @@ public enum TypeCannon {
 		public float[] getAreaCannon() {
 			return new float[] {config.getWidthRocketLauncher(),
 								config.getHeightRocketLauncher()};
+		}
+
+		@Override
+		public int getStandartAmmo() {
+			return 5;
 		}
 	},
 	LASER_GUN {
@@ -40,6 +50,11 @@ public enum TypeCannon {
 			return new float[] {config.getWidthLasertGun(),
 								config.getHeightLaserGun()};
 		}
+
+		@Override
+		public int getStandartAmmo() {
+			return 5;
+		}
 	},
 	NONE {
 		@Override
@@ -52,10 +67,16 @@ public enum TypeCannon {
 			return new float[] {config.getWidthLasertGun(),
 								config.getHeightLaserGun()};
 		}
+
+		@Override
+		public int getStandartAmmo() {
+			return 0;
+		}
 	};
 	
 	protected GameConfig config = GameConfig.getInstance();
 	
 	public abstract TypeProjectile getTypeProjectile();
 	public abstract float[] getAreaCannon();
+	public abstract int getStandartAmmo();
 }
