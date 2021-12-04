@@ -13,6 +13,7 @@ public class EnemyShip implements Ship {
 	private TypeEShip typeShip;
 	private AttackBehavior attackBehavior;
 	private MoveBehavior moveBehavior;
+	private float hp;
 	private Cannon cannon;
 	private GameConfig config;
 	private float[] widthHeight;
@@ -26,6 +27,7 @@ public class EnemyShip implements Ship {
 		this.attackBehavior = attackBehavior;
 		this.moveBehavior = moveBehavior;
 		this.config = config;
+		hp = 100; // get from config and save file | different hp for different ships
 		this.areaObject = areaObject;
 		this.cannon = cannon;
 		attackBehavior.setEnemyShip(this);
@@ -140,6 +142,16 @@ public class EnemyShip implements Ship {
 
 	public void setMoveBehavior(MoveBehavior moveBehavior) {
 		this.moveBehavior = moveBehavior;
+	}
+
+	@Override
+	public float getHP() {
+		return hp;
+	}
+
+	@Override
+	public void setHP(float hp) {
+		this.hp = hp;
 	}
 	
 }
