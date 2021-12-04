@@ -18,7 +18,7 @@ public enum TypeCannon {
 
 		@Override
 		public int getStandartAmmo() {
-			return 10;
+			return config.getAmmoAssaultGun();
 		}
 
 	},
@@ -36,7 +36,7 @@ public enum TypeCannon {
 
 		@Override
 		public int getStandartAmmo() {
-			return 5;
+			return config.getAmmoRocketLauncher();
 		}
 	},
 	LASER_GUN {
@@ -53,7 +53,7 @@ public enum TypeCannon {
 
 		@Override
 		public int getStandartAmmo() {
-			return 5;
+			return config.getAmmoLaserGun();
 		}
 	},
 	NONE {

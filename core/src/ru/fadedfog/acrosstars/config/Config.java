@@ -34,10 +34,13 @@ public class Config {
 	
 	private float widthAssaultGun;
 	private float heightAssaultGun;
+	private int ammoAssaultGun;
 	private float widthRocketLauncher;
 	private float heightRocketLauncher;
+	private int ammoRocketLauncher;
 	private float widthLasertGun;
 	private float heightLaserGun;
+	private int ammoLaserGun;
 	
 	private Config() {
 	}
@@ -319,6 +322,30 @@ public class Config {
 
 	public void setHpShipEKamikaze(float hpShipEKamikaze) {
 		this.hpShipEKamikaze = hpShipEKamikaze;
+	}
+
+	public int getAmmoAssaultGun() {
+		return ammoAssaultGun;
+	}
+
+	public void setAmmoAssaultGun(int ammoAssaultGun) {
+		this.ammoAssaultGun = ammoAssaultGun;
+	}
+
+	public int getAmmoRocketLauncher() {
+		return ammoRocketLauncher;
+	}
+
+	public void setAmmoRocketLauncher(int ammoRocketLauncher) {
+		this.ammoRocketLauncher = ammoRocketLauncher;
+	}
+
+	public int getAmmoLaserGun() {
+		return ammoLaserGun;
+	}
+
+	public void setAmmoLaserGun(int ammoLaserGun) {
+		this.ammoLaserGun = ammoLaserGun;
 	}
 
 }
