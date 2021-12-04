@@ -12,6 +12,7 @@ import ru.fadedfog.acrosstars.movements.MovementSpaceShip;
 public class SpaceShip implements Ship {
 	private GameConfig config;
 	private float hp;
+	private int ammo;
 	private Rectangle areaObject;
 	private MovementSpaceShip movement;
 	private Cannon cannon;
@@ -29,6 +30,7 @@ public class SpaceShip implements Ship {
 //		cannon = new Cannon(TypeCannon.ROCKET_LAUNCHER); //TODO var from config-file and load-file
 //		cannon = new Cannon(TypeCannon.LASER_GUN); //TODO var from config-file and load-file
 		positioningGun();
+		ammo = cannon.getTypeCannon().getStandartAmmo(); // TODO get from config and for different cannon + get upgrade from save file
 		movement = new MovementSpaceShip();
 	}
 	
@@ -38,6 +40,13 @@ public class SpaceShip implements Ship {
 	
 	public void shift() {
 		movement.shift(areaObject);
+	}
+	
+	public void reload() {
+		int relAmmo = movement.reload(cannon);
+		if (relAmmo >= 0) {
+			ammo = relAmmo;
+		}
 	}
 
 	public void positioningGun() { // TODO Add some vars to config file
@@ -68,7 +77,14 @@ public class SpaceShip implements Ship {
 	}
 	
 	public void shoot() {
-		movement.shoot(cannon);
+		if (ammo > 0) {
+			int proj1 = cannon.getProjectilesOut().size();
+			movement.shoot(cannon);
+			int proj2 = cannon.getProjectilesOut().size();
+			if (proj1 < proj2) {
+				ammo -= 1;
+			}
+		}
 	}
 	
 	public Rectangle getAreaObject() {
@@ -95,6 +111,14 @@ public class SpaceShip implements Ship {
 	@Override
 	public void setHP(float hp) {
 		this.hp = hp;
+	}
+
+	public int getAmmo() {
+		return ammo;
+	}
+
+	public void setAmmo(int ammo) {
+		this.ammo = ammo;
 	}
 	
 }

@@ -12,6 +12,7 @@ public class MovementSpaceShip {
 	private final int A_KEY = Input.Keys.A;
 	private final int D_KEY = Input.Keys.D;
 	private final int L_SHIFT_KEY = Input.Keys.SHIFT_LEFT;
+	private final int R_KEY = Input.Keys.R;
 	
 	public MovementSpaceShip() {
 		config = GameConfig.getInstance();
@@ -49,6 +50,14 @@ public class MovementSpaceShip {
 		if (Gdx.input.isButtonJustPressed(Input.Buttons.LEFT)) {
 			cannon.shoot();
 		}
+	}
+	
+	public int reload(Cannon cannon) {
+		int ammo = -1;
+		if (Gdx.input.isKeyJustPressed(R_KEY)) {
+			ammo = cannon.getTypeCannon().getStandartAmmo();
+		}
+		return ammo;
 	}
 	
 }

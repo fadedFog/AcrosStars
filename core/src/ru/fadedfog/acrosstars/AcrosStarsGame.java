@@ -95,6 +95,7 @@ public class AcrosStarsGame extends ApplicationAdapter {
 		spaceShip.shift();
 		spaceShip.getCannon().rotate();
 		spaceShip.shoot();
+		spaceShip.reload();
 		attackOfEnemies();
 		moveOfEnemies();
 		updateProjectiles();

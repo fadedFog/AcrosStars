@@ -309,4 +309,28 @@ public class GameConfig {
 		config.setHpShipEKamikaze(hpShipEKamikaze);
 	}
 	
+	public int getAmmoAssaultGun() {
+		return config.getAmmoAssaultGun();
+	}
+
+	public void setAmmoAssaultGun(int ammoAssaultGun) {
+		config.setAmmoAssaultGun(ammoAssaultGun);
+	}
+
+	public int getAmmoRocketLauncher() {
+		return config.getAmmoRocketLauncher();
+	}
+
+	public void setAmmoRocketLauncher(int ammoRocketLauncher) {
+		config.setAmmoRocketLauncher(ammoRocketLauncher);
+	}
+
+	public int getAmmoLaserGun() {
+		return config.getAmmoLaserGun();
+	}
+
+	public void setAmmoLaserGun(int ammoLaserGun) {
+		config.setAmmoLaserGun(ammoLaserGun);
+	}
+	
 }
