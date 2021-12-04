@@ -277,4 +277,36 @@ public class GameConfig {
 		config.setShiftDistance(shiftDistance);
 	}
 	
+	public float getHpSpaceShip() {
+		return config.getHpSpaceShip();
+	}
+
+	public void setHpSpaceShip(float hpSpaceShip) {
+		config.setHpSpaceShip(hpSpaceShip);
+	}
+
+	public float getHpShipEPawn() {
+		return config.getHpShipEPawn();
+	}
+
+	public void setHpShipEPawn(float hpShipEPawn) {
+		config.setHpShipEPawn(hpShipEPawn);
+	}
+
+	public float getHpShipEBastion() {
+		return config.getHpShipEBastion();
+	}
+
+	public void setHpShipEBastion(float hpShipEBastion) {
+		config.setHpShipEBastion(hpShipEBastion);
+	}
+
+	public float getHpShipEKamikaze() {
+		return config.getHpShipEKamikaze();
+	}
+
+	public void setHpShipEKamikaze(float hpShipEKamikaze) {
+		config.setHpShipEKamikaze(hpShipEKamikaze);
+	}
+	
 }

@@ -27,6 +27,11 @@ public enum TypeEShip {
 		public MoveBehavior getMoveBehaviorEShip() {
 			return new MoveDown();
 		}
+
+		@Override
+		public float getHpEnemyShip() {
+			return config.getHpShipEPawn();
+		}
 	},
 	KAMIKAZA {
 		@Override
@@ -43,6 +48,11 @@ public enum TypeEShip {
 		@Override
 		public MoveBehavior getMoveBehaviorEShip() {
 			return new MoveKamikaze();
+		}
+
+		@Override
+		public float getHpEnemyShip() {
+			return config.getHpShipEKamikaze();
 		}
 	},
 	BASTION {
@@ -61,6 +71,13 @@ public enum TypeEShip {
 		public MoveBehavior getMoveBehaviorEShip() {
 			return new MoveChaotic();
 		}
+
+		@Override
+		public float getHpEnemyShip() {
+			return config.getHpShipEBastion();
+		}
+		
+		
 	};
 	
 	protected GameConfig config = GameConfig.getInstance();
@@ -68,4 +85,5 @@ public enum TypeEShip {
 	public abstract AttackBehavior getAttackBehaviorEShip();
 	public abstract MoveBehavior getMoveBehaviorEShip();
 	public abstract float[] getAreaEShip();
+	public abstract float getHpEnemyShip();
 }

@@ -13,13 +13,17 @@ public class Config {
 	private float shiftDistance;
 	private float[] startingColorBG;
 	private float startingAlfaBG;
+	private float hpSpaceShip;
 	
 	private float widthEPawn; 
 	private float heightEPawn;
+	private float hpShipEPawn;
 	private float widthEBastion; 
 	private float heightEBastion;
+	private float hpShipEBastion;
 	private float widthEKamikaza; 
 	private float heightEKamikaza;
+	private float hpShipEKamikaze;
 	
 	private float widthBulletAssault;
 	private float heightBulletAssault;
@@ -283,6 +287,38 @@ public class Config {
 
 	public void setShiftDistance(float shiftDistance) {
 		this.shiftDistance = shiftDistance;
+	}
+
+	public float getHpSpaceShip() {
+		return hpSpaceShip;
+	}
+
+	public void setHpSpaceShip(float hpSpaceShip) {
+		this.hpSpaceShip = hpSpaceShip;
+	}
+
+	public float getHpShipEPawn() {
+		return hpShipEPawn;
+	}
+
+	public void setHpShipEPawn(float hpShipEPawn) {
+		this.hpShipEPawn = hpShipEPawn;
+	}
+
+	public float getHpShipEBastion() {
+		return hpShipEBastion;
+	}
+
+	public void setHpShipEBastion(float hpShipEBastion) {
+		this.hpShipEBastion = hpShipEBastion;
+	}
+
+	public float getHpShipEKamikaze() {
+		return hpShipEKamikaze;
+	}
+
+	public void setHpShipEKamikaze(float hpShipEKamikaze) {
+		this.hpShipEKamikaze = hpShipEKamikaze;
 	}
 
 }

@@ -11,14 +11,14 @@ import ru.fadedfog.acrosstars.movements.MovementSpaceShip;
 
 public class SpaceShip implements Ship {
 	private GameConfig config;
-	private float hp; // 100% = 100 hp
+	private float hp;
 	private Rectangle areaObject;
 	private MovementSpaceShip movement;
 	private Cannon cannon;
 
 	public SpaceShip() {
 		config = GameConfig.getInstance();
-		hp = 100; // get from config file, after from save file
+		hp = config.getHpSpaceShip();
 		areaObject = new Rectangle();
 		areaObject.height = config.getHeightSpaceShip();
 		areaObject.width = config.getWidthSpaceShip();
