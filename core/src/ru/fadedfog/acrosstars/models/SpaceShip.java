@@ -33,6 +33,10 @@ public class SpaceShip implements Ship {
 	public void move() {
 		movement.move(areaObject);
 	}
+	
+	public void shift() {
+		movement.shift(areaObject);
+	}
 
 	public void positioningGun() { // TODO Add some vars to config file
 		Polygon areaCannon = cannon.getAreaObject();

@@ -93,8 +93,6 @@ public class AttackUnidirectional implements AttackBehavior {
 		areaProjectile.setPosition(x, y);
 		areaProjectile.setVertices(areaVertices);
 		projectile.setSpeedProjectile(30f);
-		
-		System.out.println();
 	}
 	
 	@Override

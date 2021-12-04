@@ -11,6 +11,7 @@ public class MovementSpaceShip {
 	private GameConfig config;
 	private final int A_KEY = Input.Keys.A;
 	private final int D_KEY = Input.Keys.D;
+	private final int L_SHIFT_KEY = Input.Keys.SHIFT_LEFT;
 	
 	public MovementSpaceShip() {
 		config = GameConfig.getInstance();
@@ -26,6 +27,21 @@ public class MovementSpaceShip {
 		}
 		if (Gdx.input.isKeyPressed(D_KEY)) {
 			rectangle.x += config.getStartingSpeedSpaceShip();
+		}
+	}
+	
+	public void shift(Rectangle rectangle) {
+		shiftSpaceShip(rectangle);
+	}
+	
+	private void shiftSpaceShip(Rectangle rectangle) {
+		if (Gdx.input.isKeyPressed(L_SHIFT_KEY)) {
+			if (Gdx.input.isKeyJustPressed(A_KEY)) {
+				rectangle.x -= 80f;
+			}
+			if (Gdx.input.isKeyJustPressed(D_KEY)) {
+				rectangle.x += 80f;
+			}
 		}
 	}
 	

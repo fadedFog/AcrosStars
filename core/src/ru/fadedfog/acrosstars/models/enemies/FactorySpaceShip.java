@@ -44,8 +44,7 @@ public class FactorySpaceShip {
 			cannon = new Cannon(TypeCannon.ASSAULT_GUN);
 		} 
 		
-//		MoveBehavior moveBehavior = typeEShip.getMoveBehaviorEShip();
-		MoveBehavior moveBehavior = new MoveKamikaze();
+		MoveBehavior moveBehavior = typeEShip.getMoveBehaviorEShip();
 		
 		EnemyShip enemyShip = new EnemyShip(typeEShip, cannon, typeEShip.getAttackBehaviorEShip(),
 				moveBehavior, config, areaEShip);
