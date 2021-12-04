@@ -10,6 +10,7 @@ public class Config {
 	private float widthSpaceShip; 
 	private float heightSpaceShip;
 	private float startingSpeedSpaceShip; 
+	private float shiftDistance;
 	private float[] startingColorBG;
 	private float startingAlfaBG;
 	
@@ -274,6 +275,14 @@ public class Config {
 
 	public void setHeightLaserGun(float heightLaserGun) {
 		this.heightLaserGun = heightLaserGun;
+	}
+
+	public float getShiftDistance() {
+		return shiftDistance;
+	}
+
+	public void setShiftDistance(float shiftDistance) {
+		this.shiftDistance = shiftDistance;
 	}
 
 }

@@ -7,6 +7,7 @@
   "widthSpaceShip": 32.0,
   "heightSpaceShip": 32.0,
   "startingSpeedSpaceShip": 10.0,
+  "shiftDistance": 80.0,
   "startingColorBG": [
     0.1,
     0.1,
