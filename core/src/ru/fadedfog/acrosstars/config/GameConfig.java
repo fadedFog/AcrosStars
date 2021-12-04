@@ -269,4 +269,12 @@ public class GameConfig {
 		config.setHeightLaserGun(heightLaserGun);
 	}
 	
+	public float getShiftDistance() {
+		return config.getShiftDistance();
+	}
+
+	public void setShiftDistance(float shiftDistance) {
+		config.setShiftDistance(shiftDistance);
+	}
+	
 }
